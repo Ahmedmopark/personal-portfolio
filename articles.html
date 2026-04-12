@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقالات علمية | أحمد مبارك</title>
+    <meta name="description" content="مقالات علمية وأبحاث في مجال هندسة الري وعلوم التربة.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="style.css">
+    
+    
+    
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2D5A27',
+                        'primary-dark': '#1e3d1a',
+                        'accent-green': '#79a37d',
+                        background: 'var(--background)',
+                        foreground: 'var(--foreground)',
+                        card: 'var(--card)',
+                        border: 'var(--border)',
+                        muted: 'var(--muted)',
+                        'muted-foreground': 'var(--muted-foreground)',
+                    },
+                    fontFamily: {
+                        heading: ['Urbanist', 'sans-serif'],
+                        serif: ['Urbanist', 'sans-serif'],
+                        body: ['Readex Pro', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-foreground transition-colors duration-300">
+    <!-- Noise Texture -->
+    <div class="noise"></div>
+
+    <!-- Custom Cursor -->
+    <div id="cursor-dot" class="cursor-dot hidden md:block"></div>
+    <div id="cursor-follower" class="cursor-follower hidden md:block"></div>
+
+    <!-- Background Blobs -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10 bg-background">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Scroll Progress -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-1 bg-primary z-[100] transition-all duration-300"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-6 transition-all duration-500 ease-in-out nav-scrolled">
+        <div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center gap-2 md:gap-3 shrink-0">
+                <div class="w-8 h-8 md:w-10 md:h-10 bg-primary/10 rounded-xl flex items-center justify-center border border-primary/20">
+                    <i data-lucide="leaf" class="text-primary w-4 h-4 md:w-5 md:h-5"></i>
+                </div>
+                <span class="text-lg md:text-xl font-heading font-serif text-foreground tracking-wide whitespace-nowrap">أحمد مبارك</span>
+            </div>
+
+            <!-- Desktop Links -->
+            <div class="hidden lg:flex items-center gap-10">
+                <div class="flex items-center gap-8">
+                    <a href="index.html" class="text-foreground/70 hover:text-primary transition-all font-body text-sm font-medium tracking-wide">الرئيسية</a>
+                    <a href="about.html" class="text-foreground/70 hover:text-primary transition-all font-body text-sm font-medium tracking-wide">من أنا</a>
+                    <a href="services.html" class="text-foreground/70 hover:text-primary transition-all font-body text-sm font-medium tracking-wide">الخدمات</a>
+                    <a href="portfolio.html" class="text-foreground/70 hover:text-primary transition-all font-body text-sm font-medium tracking-wide">أعمالي</a>
+                    <a href="articles.html" class="text-primary transition-all font-body text-sm font-bold tracking-wide">مقالات علمية</a>
+                    <a href="contact.html" class="text-foreground/70 hover:text-primary transition-all font-body text-sm font-medium tracking-wide">تواصل معي</a>
+                </div>
+                
+                <div class="flex items-center gap-4 border-r border-foreground/10 pr-6 mr-2">
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-muted transition-colors">
+                        <i data-lucide="moon" class="dark:hidden w-5 h-5"></i>
+                        <i data-lucide="sun" class="hidden dark:block w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Actions -->
+            <div class="flex items-center gap-2 md:gap-4 lg:hidden shrink-0">
+                <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-muted transition-colors">
+                    <i data-lucide="moon" class="dark:hidden w-5 h-5"></i>
+                    <i data-lucide="sun" class="hidden dark:block w-5 h-5"></i>
+                </button>
+                <button id="mobile-menu-toggle" class="text-foreground p-2">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                    <i data-lucide="x" class="w-6 h-6 hidden"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="lg:hidden glass absolute top-full left-0 right-0 border-t border-border overflow-hidden max-h-0 transition-all duration-300">
+            <div class="flex flex-col p-6 gap-4">
+                <a href="index.html" class="mobile-nav-link text-lg font-medium hover:text-primary transition-colors">الرئيسية</a>
+                <a href="about.html" class="mobile-nav-link text-lg font-medium hover:text-primary transition-colors">من أنا</a>
+                <a href="services.html" class="mobile-nav-link text-lg font-medium hover:text-primary transition-colors">الخدمات</a>
+                <a href="portfolio.html" class="mobile-nav-link text-lg font-medium hover:text-primary transition-colors">أعمالي</a>
+                <a href="articles.html" class="mobile-nav-link text-lg font-bold text-primary transition-colors">مقالات علمية</a>
+                <a href="contact.html" class="mobile-nav-link text-lg font-medium hover:text-primary transition-colors">تواصل معي</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32">
+        <!-- Scientific Articles -->
+        <section id="articles" class="section-padding bg-background relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full opacity-[0.02] pointer-events-none article-pattern"></div>
+            
+            <div class="container mx-auto relative z-10">
+                <div class="text-center mb-24 reveal-y">
+                    <span class="text-primary font-medium tracking-[0.2em] uppercase text-sm mb-4 block">المعرفة المستدامة</span>
+                    <h1 class="text-4xl md:text-6xl font-heading font-serif text-foreground islamic-border pb-6 inline-block">مقالات علمية</h1>
+                    <p class="text-lg text-muted-foreground max-w-2xl mx-auto mt-6 font-light">
+                        مساحة لتبادل المعرفة التقنية ونتائج الأبحاث الميدانية في مجال هندسة الري وعلوم التربة.
+                    </p>
+                </div>
+
+                <div class="flex flex-col lg:flex-row gap-12">
+                    <!-- Table of Contents Sidebar -->
+                    <aside class="lg:w-1/4 h-fit sticky top-32 reveal-x">
+                        <div class="glass p-8 rounded-3xl border border-primary/20 bg-card/40">
+                            <div class="flex items-center gap-3 mb-8 border-b border-primary/10 pb-4">
+                                <i data-lucide="list" class="text-primary w-5 h-5"></i>
+                                <h4 class="text-lg font-bold text-foreground">فهرس المقالات</h4>
+                            </div>
+                            <nav class="space-y-4">
+                                <a href="#article-1" class="group flex items-start gap-4 p-3 rounded-xl hover:bg-primary/5 transition-all">
+                                    <span class="w-6 h-6 rounded-lg bg-primary/10 text-primary text-xs font-bold flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">١</span>
+                                    <div class="flex-grow">
+                                        <p class="text-sm font-medium text-foreground group-hover:text-primary transition-colors">يعني إيه ري؟</p>
+                                        <p class="text-[10px] text-muted-foreground mt-1">أساسيات الري</p>
+                                    </div>
+                                </a>
+                                <!-- Future Article Placeholder -->
+                                <div class="p-3 rounded-xl border border-border border-dashed opacity-50">
+                                    <p class="text-[10px] text-muted-foreground text-center">ترقبوا مقالات بحثية قريباً...</p>
+                                </div>
+                            </nav>
+                            
+                            <div class="mt-12 p-6 bg-primary/5 rounded-2xl border border-primary/10 text-center">
+                                <i data-lucide="bell" class="w-6 h-6 text-primary mx-auto mb-3"></i>
+                                <p class="text-xs text-muted-foreground font-light px-2">اشترك لتصلك أحدث المقالات العلمية فور نشرها.</p>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Articles Feed -->
+                    <div class="lg:w-3/4 space-y-16">
+                        <!-- Article 1 -->
+                        <article id="article-1" class="glass rounded-[2rem] border border-border overflow-hidden shadow-2xl reveal-scale bg-card/40">
+                            <div class="p-8 md:p-12">
+                                <div class="flex items-center gap-4 mb-8">
+                                    <span class="px-4 py-1.5 bg-primary/10 text-primary text-[10px] uppercase font-bold tracking-widest rounded-full border border-primary/20">مقالات علمية</span>
+                                    <span class="px-4 py-1.5 bg-muted/30 text-muted-foreground text-[10px] uppercase font-bold tracking-widest rounded-full border border-border">أساسيات الري</span>
+                                    <span class="text-muted-foreground text-xs font-medium mr-auto">10 أبريل 2026</span>
+                                </div>
+
+                                <h4 class="text-3xl md:text-5xl font-heading font-serif text-foreground mb-10 leading-tight">
+                                    يعني إيه ري؟ <span class="text-primary italic">(أكثر من مجرد مياه)</span>
+                                </h4>
+
+                            <div class="prose prose-lg prose-green max-w-none text-foreground/80 leading-relaxed font-light space-y-8 text-right">
+                                <p class="text-3xl font-traditional text-primary text-center mb-16 opacity-90 drop-shadow-sm">بسم الله الرحمن الرحيم</p>
+                                
+                                <p>
+                                    أول مقال لي في <span class="text-primary font-medium">توثيق العلم</span>، وحبيت أبدأ بالسؤال الأساسي اللي ممكن أي حد يشوفه بديهي، لكنه في الحقيقة هو جوهر عمارة الأرض: يعني إيه ري؟
+                                </p>
+
+                                <div class="bg-primary/5 border-r-4 border-primary p-8 rounded-l-2xl my-10 italic">
+                                    "الري مش مجرد إننا بنرمي مياه للزرع وخلاص، ولا هو 'خرطوم ومحبس'. الري هو الإضافة الصناعية للمياه للتربة بغرض توفير الرطوبة اللازمة لنمو النبات" <span class="text-sm block mt-4 font-bold">— (الجميزي، 2021)</span>
+                                </div>
+
+                                <p>
+                                    وعلشان إحنا مأمورين بالإحسان في كل شيء، فالري في الهندسة هو <span class="font-bold text-foreground">"علم وحسابات"</span>؛ إزاي ندي النبات كمية المياه اللي محتاجها (Crop Water Requirement)، في الوقت الصح، وبالطريقة اللي تمنع هدر المياه، لأن نقطة المياه أمانة وهنتحاسب عليها.
+                                </p>
+
+                                <div class="space-y-6 mt-12">
+                                    <h5 class="text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
+                                        <i data-lucide="info" class="text-primary w-6 h-6"></i>
+                                        ليه بنهتم بالري كمهندسين؟
+                                    </h5>
+                                    <p>الري هو المحرك الأساسي للواقع الزراعي لعدة أسباب:</p>
+                                    
+                                    <ul class="space-y-6 list-none pr-0">
+                                        <li class="flex gap-4">
+                                            <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-1"><i data-lucide="check" class="w-3 h-3 text-primary"></i></div>
+                                            <p><span class="font-bold text-foreground">عمارة الأرض:</span> لا حياة بدون مياه، والري هو الوسيلة اللي بنحول بيها الأراضي الصحراوية لجنان خضراء.</p>
+                                        </li>
+                                        <li class="flex gap-4">
+                                            <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-1"><i data-lucide="check" class="w-3 h-3 text-primary"></i></div>
+                                            <p><span class="font-bold text-foreground">الأمانة العلمية:</span> النبات كائن حي، وزيادة المياه أو نقصها ممكن يقتله؛ وهنا بيجي دور "مهندس الري" في حساب الاحتياجات المائية بدقة (Evapotranspiration).</p>
+                                        </li>
+                                        <li class="flex gap-4">
+                                            <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-1"><i data-lucide="check" class="w-3 h-3 text-primary"></i></div>
+                                            <p><span class="font-bold text-foreground">الاقتصاد:</span> الري الحديث (تنقيط أو رش) بيوفر في الأسمدة والعمالة وبيرفع الإنتاجية، وده جزء من إتقان العمل اللي أمرنا بيه الرسول ﷺ.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="mt-12">
+                                    <h5 class="text-2xl font-bold text-foreground mb-4">منظوري الشخصي للري</h5>
+                                    <p>
+                                        أنا بشوف إن "مهندس الري" هو ساقي الأرض ومؤتمن على سر الحياة فيها. وعشان كدا قررت في المقالات الجاية إن شاء الله، إني أبدأ معاكم رحلة من الصفر؛ نتعرف فيها على أنواع التربة، إزاي نختار الطلمبات، وإزاي نصمم شبكة ري كاملة باستخدام البرامج الهندسية زي AutoCAD و WaterGEMS، بس بروح "الباحث" اللي بيتعلم كل يوم جديد.
+                                    </p>
+                                    <p class="mt-6">
+                                        إن شاء الله المقالات دي هتكون مفيدة جداً للي عاوز ينتفع بيها، وهتكون موثقة ومراجعة من المراجع العلمية، وهتكون مرجع ليا وليكم في رحلة التعلم اللي لاتنتهي.
+                                    </p>
+                                </div>
+
+                                <div class="flex flex-col items-end mt-16 pt-8 border-t border-border">
+                                    <p class="text-xl font-bold text-foreground">أحمد محمد مبارك</p>
+                                    <p class="text-primary font-medium tracking-wide">مهندس ري</p>
+                                </div>
+
+                                <!-- References -->
+                                <div class="mt-16 p-8 bg-muted rounded-2xl border border-border">
+                                    <h6 class="text-sm font-bold text-muted-foreground uppercase tracking-[0.2em] mb-4">المراجع العلمية للمقال:</h6>
+                                    <ul class="space-y-3 text-sm text-foreground/60 font-light pr-0 list-none">
+                                        <li class="flex gap-2"><span>•</span> الجميزي، أحمد (2021). أساسيات هندسة الري والصرف. دار الكتب الزراعية، القاهرة.</li>
+                                        <li class="flex gap-2" dir="ltr"><span>•</span> FAO (2020). Crop evapotranspiration - Guidelines for computing water requirements. Irrigation and Drainage Paper No. 56.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Article Grid (Future Articles) -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 pb-20">
+                    <article class="group glass rounded-[2.5rem] overflow-hidden border border-border hover:border-primary/30 transition-all duration-500 reveal-y">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1592318780360-1d898863690d?w=800&auto=format&fit=crop" alt="Irrigation 4.0" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute top-4 right-4 bg-primary text-white text-[10px] font-bold px-4 py-2 rounded-full uppercase tracking-widest">Irrigation 4.0</div>
+                        </div>
+                        <div class="p-8">
+                            <span class="text-xs text-muted-foreground font-medium mb-4 block">12 أبريل 2024</span>
+                            <h3 class="text-2xl font-bold mb-4 text-foreground group-hover:text-primary transition-colors">مستقبل الري الذكي: دمج الذكاء الاصطناعي مع صور الأقمار الصناعية</h3>
+                            <p class="text-muted-foreground font-light mb-8 leading-relaxed line-clamp-3">
+                                نناقش في هذه المقالة كيف تساهم تقنيات الثورة الصناعية الرابعة في تحويل أنظمة الري التقليدية إلى أنظمة ذكية ذاتية الإدارة.
+                            </p>
+                            <a href="#" class="inline-flex items-center gap-2 text-primary font-bold text-sm tracking-wide">
+                                <span>اقرأ المقال بالكامل</span>
+                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="group glass rounded-[2.5rem] overflow-hidden border border-border hover:border-primary/30 transition-all duration-500 reveal-y" style="transition-delay: 0.1s">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?w=800&auto=format&fit=crop" alt="Soil Science" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute top-4 right-4 bg-accent-green text-white text-[10px] font-bold px-4 py-2 rounded-full uppercase tracking-widest">Soil Science</div>
+                        </div>
+                        <div class="p-8">
+                            <span class="text-xs text-muted-foreground font-medium mb-4 block">10 مارس 2024</span>
+                            <h3 class="text-2xl font-bold mb-4 text-foreground group-hover:text-primary transition-colors">تحليل التربة: حجر الزاوية للمشاريع الناجحة</h3>
+                            <p class="text-muted-foreground font-light mb-8 leading-relaxed line-clamp-3">
+                                لماذا يعد فهم الخصائص الفيزيائية للتربة أهم خطوة قبل اختيار المواسير والرشاشات؟ إجابات علمية مفصلة.
+                            </p>
+                            <a href="#" class="inline-flex items-center gap-2 text-primary font-bold text-sm tracking-wide">
+                                <span>اقرأ المقال بالكامل</span>
+                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </article>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-background border-t border-border pt-24 pb-12 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-[0.02] pointer-events-none"></div>
+        <div class="container mx-auto px-6 md:px-12 relative z-10">
+            <div class="flex flex-col lg:flex-row justify-between items-start gap-16 mb-20">
+                <div class="max-w-md text-right lg:text-right">
+                     <div class="flex items-center gap-3 mb-8 justify-end">
+                        <span class="text-2xl font-heading font-serif text-foreground tracking-widest uppercase">أحمد مبارك</span>
+                        <div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center border border-primary/20">
+                            <i data-lucide="leaf" class="text-primary w-5 h-5"></i>
+                        </div>
+                    </div>
+                    <p class="text-muted-foreground leading-relaxed mb-10 font-light text-lg text-right">
+                        نؤمن بأن هندسة الري هي قلب كل مساحة خضراء نابضة. ندمج المعرفة العلمية بالتقنيات الحديثة لنصنع بيئات مستدامة تليق بطموحكم.
+                    </p>
+                    <div class="flex gap-4 justify-end">
+                        <a href="https://www.linkedin.com/in/ahmed-moparak-273a94241" target="_blank" class="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-all duration-500 bg-card/5 shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-all duration-500 bg-card/5 shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y1="6.5"/></svg>
+                        </a>
+                        <a href="https://facebook.com" class="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-all duration-500 bg-card/5 shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-16 lg:gap-32 text-right">
+                    <div>
+                        <h5 class="text-primary text-[10px] uppercase tracking-widest font-bold mb-8">التنقل</h5>
+                        <ul class="space-y-4 text-muted-foreground text-sm font-medium">
+                            <li><a href="index.html" class="hover:text-primary transition-colors flex items-center gap-3 justify-end"><span>الرئيسية</span> <i data-lucide="home" class="w-4 h-4"></i></a></li>
+                            <li><a href="about.html" class="hover:text-primary transition-colors flex items-center gap-3 justify-end"><span>من أنا</span> <i data-lucide="user" class="w-4 h-4"></i></a></li>
+                            <li><a href="services.html" class="hover:text-primary transition-colors flex items-center gap-3 justify-end"><span>الخدمات</span> <i data-lucide="cog" class="w-4 h-4"></i></a></li>
+                            <li><a href="portfolio.html" class="hover:text-primary transition-colors flex items-center gap-3 justify-end"><span>الأعمال</span> <i data-lucide="briefcase" class="w-4 h-4"></i></a></li>
+                            <li><a href="articles.html" class="text-primary transition-colors flex items-center gap-3 justify-end italic"><span>مقالات علمية</span> <i data-lucide="book-open" class="w-4 h-4"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-border pt-12 flex flex-col md:flex-row justify-between items-center gap-8">
+                <p class="text-muted-foreground/50 text-[10px] uppercase tracking-widest font-bold">
+                    © 2026 أحمد مبارك. جميع الحقوق محفوظة.
+                </p>
+                
+                <button id="scroll-to-top" class="group flex items-center gap-4 text-muted-foreground hover:text-primary transition-all duration-500">
+                    <span class="text-[10px] uppercase tracking-widest font-bold">العودة للأعلى</span>
+                    <div class="w-10 h-10 rounded-full border border-border flex items-center justify-center group-hover:border-primary transition-colors">
+                        <i data-lucide="arrow-up" class="w-4 h-4"></i>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+</body>
+</html>
