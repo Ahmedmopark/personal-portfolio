@@ -1,31 +1,89 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. Initialization ---
-    lucide.createIcons();
+    // --- 0. Global Setup ---
 
-    // --- 2. Core Layout Initialization ---
-    const initLayout = () => {
-        const html = document.documentElement;
-        html.lang = 'ar';
-        html.dir = 'rtl';
-        document.body.style.fontFamily = "'Readex Pro', sans-serif";
-    };
+    // --- 1. Initialization & Preloader ---
+    if (window.lucide) lucide.createIcons();
+    
+    const preloader = document.getElementById('preloader');
+    const loaderProgress = document.getElementById('loader-progress');
+    
+    if (preloader && loaderProgress) {
+        let progress = 0;
+        const loadInterval = setInterval(() => {
+            progress += Math.random() * 40; // Faster progress
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(loadInterval);
+                loaderProgress.style.width = '100%';
+                setTimeout(() => {
+                    preloader.classList.add('hidden');
+                    document.body.classList.add('loaded');
+                }, 300);
+            } else {
+                loaderProgress.style.width = `${progress}%`;
+            }
+        }, 80);
+    } else {
+        document.body.classList.add('loaded');
+    }
 
-    initLayout();
-
-    // --- 3. Theme Management ---
+    // --- 2. Theme Management ---
     const themeToggles = document.querySelectorAll('#theme-toggle, #theme-toggle-mobile');
     const toggleTheme = () => {
-        document.documentElement.classList.toggle('dark');
-        localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
     };
 
     themeToggles.forEach(btn => btn.addEventListener('click', toggleTheme));
-
     if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
     }
 
-    // --- 4. Mobile Menu Navigation ---
+    // --- 3. Custom Cursor ---
+    const cursorDot = document.getElementById('cursor-dot');
+    const cursorFollower = document.getElementById('cursor-follower');
+    let mouseX = 0, mouseY = 0;
+    let followerX = 0, followerY = 0;
+    let isMouseMoving = false;
+
+    if (cursorDot && cursorFollower) {
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+            isMouseMoving = true;
+        }, { passive: true });
+
+        const animateCursor = () => {
+            if (isMouseMoving) {
+                followerX += (mouseX - followerX) * 0.15;
+                followerY += (mouseY - followerY) * 0.15;
+                cursorFollower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0)`;
+            }
+            requestAnimationFrame(animateCursor);
+        };
+        animateCursor();
+
+        document.querySelectorAll('a, button, .clickable, input, textarea').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+        });
+    }
+
+    // --- 4. Page Transitions ---
+    document.querySelectorAll('a').forEach(link => {
+        if (link.hostname === window.location.hostname && !link.hash && link.target !== '_blank' && !link.href.includes('javascript:void(0)')) {
+            link.addEventListener('click', (e) => {
+                const target = link.href;
+                if (!target || target === window.location.href) return;
+                e.preventDefault();
+                document.body.classList.add('fade-out');
+                setTimeout(() => window.location.href = target, 250);
+            });
+        }
+    });
+
+    // --- 5. Mobile Menu & Active Link ---
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     if (mobileMenuToggle && mobileMenu) {
@@ -50,12 +108,19 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         mobileMenuToggle.addEventListener('click', () => toggleMenu());
-        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        
+        // Highlight active link
+        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        mobileMenu.querySelectorAll('.mobile-nav-link').forEach(link => {
+            const linkPath = link.getAttribute('href');
+            if (linkPath === currentPath) {
+                link.classList.add('active');
+            }
             link.addEventListener('click', () => toggleMenu(true));
         });
     }
 
-    // --- 5. Performance Optimized Scroll (Throttle) ---
+    // --- 6. Scroll Logic (Progress & Navbar) ---
     const navbar = document.getElementById('navbar');
     const scrollProgress = document.getElementById('scroll-progress');
     let ticking = false;
@@ -65,35 +130,56 @@ document.addEventListener('DOMContentLoaded', () => {
             window.requestAnimationFrame(() => {
                 const scrolled = window.scrollY;
                 if (navbar) {
-                    navbar.classList.toggle('nav-scrolled', scrolled > 50);
+                    navbar.classList.toggle('nav-scrolled', scrolled > 20);
                 }
                 if (scrollProgress) {
                     const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
                     scrollProgress.style.width = `${(scrolled / totalHeight) * 100}%`;
                 }
+                
+                // Optimized Parallax Blobs
+                const blobs = document.querySelectorAll('.blob');
+                for (let i = 0; i < blobs.length; i++) {
+                    const speed = (i + 1) * 0.05;
+                    blobs[i].style.transform = `translate3d(0, ${scrolled * speed}px, 0)`;
+                }
+
                 ticking = false;
             });
             ticking = true;
         }
-    });
+    }, { passive: true });
 
-    // --- 6. Smooth Reveal Animations ---
+    // --- 7. Enhanced Reveal Animations ---
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('revealed');
-                revealObserver.unobserve(entry.target);
+                const target = entry.target;
+                target.style.willChange = 'opacity, transform';
+                
+                // Trigger reflow
+                target.offsetHeight;
+                
+                target.classList.add('revealed');
+                
+                const onTransitionEnd = () => {
+                    target.style.willChange = 'auto';
+                    target.removeEventListener('transitionend', onTransitionEnd);
+                };
+                target.addEventListener('transitionend', onTransitionEnd);
+                revealObserver.unobserve(target);
             }
         });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.15 });
 
     document.querySelectorAll('.reveal-y, .reveal-x, .reveal-scale').forEach(el => revealObserver.observe(el));
 
-    // --- 7. Comparison Slider Logic ---
+    // --- 8. Comparison Slider Logic (RTL Fix) ---
     const comparisonContainer = document.getElementById('comparison-container');
     if (comparisonContainer) {
         const afterImage = document.getElementById('after-image');
         const sliderHandle = document.getElementById('slider-handle');
+        const isRTL = document.documentElement.dir === 'rtl';
         let isDragging = false;
 
         const updateSlider = (clientX) => {
@@ -101,7 +187,12 @@ document.addEventListener('DOMContentLoaded', () => {
             let x = clientX - rect.left;
             x = Math.max(0, Math.min(x, rect.width));
             const percent = (x / rect.width) * 100;
-            afterImage.style.clipPath = `inset(0 ${document.documentElement.dir === 'rtl' ? percent : 100 - percent}% 0 0)`;
+            
+            if (isRTL) {
+                afterImage.style.clipPath = `inset(0 0 0 ${percent}%)`;
+            } else {
+                afterImage.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+            }
             sliderHandle.style.left = `${percent}%`;
         };
 
@@ -117,8 +208,10 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('touchend', end);
     }
 
-    // --- 8. Contact Form (Professional AJAX Response) ---
+    // --- 9. Contact Form ---
     const contactForm = document.getElementById('contact-form');
+    let submissionTimeout;
+
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -126,42 +219,133 @@ document.addEventListener('DOMContentLoaded', () => {
             const btnSpan = submitBtn.querySelector('span');
             const originalHTML = submitBtn.innerHTML;
 
-            // Loading state
+            if (submissionTimeout) clearTimeout(submissionTimeout);
+
             submitBtn.disabled = true;
             submitBtn.style.opacity = '0.7';
             if (btnSpan) btnSpan.innerText = 'جاري الإرسال...';
 
             const formData = new FormData(contactForm);
-            const object = Object.fromEntries(formData);
-
+            formData.append('form-name', 'contact');
+            
             try {
-                const response = await fetch('https://api.web3forms.com/submit', {
+                const response = await fetch('/', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify(object)
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: new URLSearchParams(formData).toString()
                 });
-                const result = await response.json();
 
-                if (result.success) {
-                    submitBtn.classList.replace('bg-primary', 'bg-green-600');
+                if (response.ok) {
+                    submitBtn.classList.add('bg-green-600');
                     if (btnSpan) btnSpan.innerText = 'تم الإرسال بنجاح!';
                     contactForm.reset();
                 } else {
-                    throw new Error('API Error');
+                    throw new Error('Netlify Error');
                 }
             } catch (err) {
                 if (btnSpan) btnSpan.innerText = 'خطأ في الإرسال';
             } finally {
-                setTimeout(() => {
+                submissionTimeout = setTimeout(() => {
                     submitBtn.disabled = false;
                     submitBtn.style.opacity = '1';
                     submitBtn.innerHTML = originalHTML;
-                    submitBtn.classList.replace('bg-green-600', 'bg-primary');
-                    lucide.createIcons();
-                }, 3000);
+                    submitBtn.classList.remove('bg-green-600');
+                    if (window.lucide) lucide.createIcons();
+                }, 4000);
             }
         });
     }
 
-    // Final Init
+    // --- 10. Visual Upgrades: Ripple, Lazy Loading, Counters ---
+    // Ripple Effect
+    document.querySelectorAll('.bg-primary, .cta-link, button').forEach(button => {
+        button.addEventListener('mousedown', function(e) {
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            this.appendChild(ripple);
+            const size = Math.max(this.offsetWidth, this.offsetHeight);
+            ripple.style.width = ripple.style.height = `${size}px`;
+            ripple.style.left = `${e.clientX - this.getBoundingClientRect().left - size/2}px`;
+            ripple.style.top = `${e.clientY - this.getBoundingClientRect().top - size/2}px`;
+            ripple.addEventListener('animationend', () => ripple.remove());
+        });
+    });
+
+    // Lazy Loading Images Fade-in
+    const imgObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('loaded');
+                imgObserver.unobserve(entry.target);
+            }
+        });
+    });
+    document.querySelectorAll('img').forEach(img => imgObserver.observe(img));
+
+    // Animated Counters
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = entry.target;
+                const countTo = parseInt(target.innerText.replace(/\D/g, ''));
+                let count = 0;
+                const duration = 2000;
+                const step = (countTo / duration) * 10;
+                const timer = setInterval(() => {
+                    count += step;
+                    if (count >= countTo) {
+                        target.innerText = countTo + (target.innerText.includes('+') ? '+' : '');
+                        clearInterval(timer);
+                    } else {
+                        target.innerText = Math.floor(count) + (target.innerText.includes('+') ? '+' : '');
+                    }
+                }, 10);
+                counterObserver.unobserve(target);
+            }
+        });
+    });
+    document.querySelectorAll('.stat-number').forEach(num => counterObserver.observe(num));
+
+    // Skill Bar Animation
+    const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const fill = entry.target.querySelector('.skill-bar-fill');
+                if (fill) {
+                    fill.style.width = fill.getAttribute('data-width') || '0%';
+                }
+                skillObserver.unobserve(entry.target);
+            }
+        });
+    });
+    document.querySelectorAll('.skill-item').forEach(item => skillObserver.observe(item));
+
+    // Scroll to Top
+    const stt = document.getElementById('scroll-to-top');
+    if (stt) stt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 });
+
+// Water Savings Calculator
+function calculateSavings() {
+    const area = document.getElementById('area-input').value;
+    const cropNeed = document.getElementById('crop-select').value;
+    const resultDiv = document.getElementById('calc-result');
+    const savingsSpan = document.getElementById('savings-value');
+
+    if (area && area > 0) {
+        // Simple logic: Traditional flooding uses ~40% more water than smart drip irrigation
+        // Formula: Area * Crop Need per Faddan * 0.4 (savings factor)
+        const savings = Math.round(area * cropNeed * 0.4);
+        
+        savingsSpan.innerText = savings.toLocaleString();
+        resultDiv.classList.remove('hidden');
+        
+        // Scroll to result if on mobile
+        if (window.innerWidth < 768) {
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    } else {
+        alert('يرجى إدخال مساحة صحيحة');
+    }
+}
+

@@ -9,7 +9,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,9 +19,6 @@
     
     <!-- Custom Style -->
     <link rel="stylesheet" href="style.css">
-    
-    
-    
     
     <script>
         tailwind.config = {
@@ -40,9 +37,9 @@
                         'muted-foreground': 'var(--muted-foreground)',
                     },
                     fontFamily: {
-                        heading: ['Outfit', 'Readex Pro', 'sans-serif'],
-                        body: ['Outfit', 'Readex Pro', 'sans-serif'],
-                        serif: ['Outfit', 'Readex Pro', 'sans-serif'],
+                        heading: ['Readex Pro', 'sans-serif'],
+                        body: ['Readex Pro', 'sans-serif'],
+                        serif: ['Readex Pro', 'sans-serif'],
                     },
                     animation: {
                         'bounce-slow': 'bounce 3s infinite',
@@ -55,6 +52,17 @@
     </script>
 </head>
 <body class="bg-background text-foreground transition-colors duration-300">
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="loader-logo">
+            <i data-lucide="leaf" class="text-primary w-8 h-8"></i>
+        </div>
+        <div class="loader-bar">
+            <div id="loader-progress" class="loader-progress"></div>
+        </div>
+        <p class="text-[10px] uppercase tracking-[0.3em] text-primary font-bold mt-4">جاري التحميل...</p>
+    </div>
+
     <!-- Noise Texture -->
     <div class="noise"></div>
 
@@ -159,7 +167,7 @@
                 <div class="blob blob-3 opacity-20"></div>
 
                 <div class="relative h-full w-full">
-                    <img src="public/hero.png" alt="Irrigation Design Render" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="public/hero.png" alt="Irrigation Design Render" class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async">
                 </div>
                 
                 <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_var(--background)_100%)]"></div>
@@ -188,14 +196,15 @@
                         </p>
 
                         <div class="flex flex-wrap gap-6 justify-start">
-                            <a href="portfolio.html" class="group relative px-10 py-4 bg-primary text-white rounded-full font-bold text-lg overflow-hidden transition-all hover:bg-white hover:text-primary shadow-xl hover:shadow-primary/20">
+                            <a href="portfolio.html" class="group relative px-10 py-4 bg-primary text-white rounded-full font-bold text-lg overflow-hidden transition-all hover:bg-primary-dark shadow-xl hover:shadow-primary/20">
                                 <span class="relative z-10 flex items-center gap-2">
                                     <i data-lucide="arrow-left" class="w-5 h-5 transition-transform group-hover:-translate-x-1"></i>
                                     <span>استكشاف المشاريع</span>
                                 </span>
                             </a>
-                            <a href="about.html" class="px-10 py-4 glass text-foreground rounded-full font-medium text-lg hover:bg-foreground/5 transition-all border border-foreground/10">
-                                من أنا؟
+                            <a href="public/cv.png" download class="px-10 py-4 glass text-foreground rounded-full font-bold text-lg hover:bg-foreground/5 transition-all border border-foreground/10 flex items-center gap-3">
+                                <i data-lucide="download" class="w-5 h-5"></i>
+                                <span>تحميل السيرة الذاتية</span>
                             </a>
                         </div>
                     </div>
@@ -208,7 +217,7 @@
                                 <div class="absolute inset-0 border border-accent-green/20 rounded-full scale-110 animate-spin-slow-reverse"></div>
                                 
                                 <div class="relative h-full w-full rounded-full overflow-hidden border-[1px] border-primary/20 shadow-2xl group">
-                                    <img src="public/profile.png" alt="أحمد محمد مبارك" class="absolute inset-0 w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-105">
+                                    <img src="public/profile.png" alt="أحمد محمد مبارك" class="absolute inset-0 w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-105" loading="lazy" decoding="async">
                                     <div class="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent"></div>
                                 </div>
                             </div>
@@ -218,51 +227,153 @@
             </div>
         </section>
 
-        <!-- Impact Stats -->
-        <section class="py-20 bg-primary/5 border-y border-primary/10 overflow-hidden">
-            <div class="container mx-auto px-6 md:px-12">
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-                    <div class="text-center group reveal-y" style="transition-delay: 0.1s">
-                        <div class="flex justify-center mb-6">
-                            <div class="w-14 h-14 rounded-2xl glass flex items-center justify-center text-blue-500 group-hover:scale-110 transition-transform duration-500 shadow-xl">
-                                <i data-lucide="droplets" class="w-6 h-6"></i>
-                            </div>
-                        </div>
-                        <h4 class="text-3xl md:text-5xl font-heading font-serif text-foreground mb-3">أمانة</h4>
-                        <p class="text-xs md:text-sm text-muted-foreground font-medium uppercase tracking-widest">ترشيد مائي مستدام</p>
+        <!-- Trusted Technologies -->
+        <section class="py-12 bg-background border-b border-border overflow-hidden">
+            <div class="container mx-auto px-6">
+                <p class="text-center text-[10px] uppercase tracking-[0.4em] text-muted-foreground mb-8">نستخدم أحدث التقنيات العالمية</p>
+                <div class="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
+                    <div class="flex items-center gap-2 font-bold text-xl"><span>HUNTER</span></div>
+                    <div class="flex items-center gap-2 font-bold text-xl"><span>RAIN BIRD</span></div>
+                    <div class="flex items-center gap-2 font-bold text-xl"><span>TORO</span></div>
+                    <div class="flex items-center gap-2 font-bold text-xl"><span>NETAFIM</span></div>
+                    <div class="flex items-center gap-2 font-bold text-xl"><span>GRUNDFOS</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Engineering Tools & Software -->
+        <section class="py-24 bg-muted/10 border-b border-border overflow-hidden">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 reveal-y">
+                    <span class="text-primary font-medium tracking-[0.3em] uppercase text-xs mb-4 block">الترسانة التقنية</span>
+                    <h2 class="text-3xl md:text-4xl font-heading font-serif text-foreground mb-6">الأدوات التي <span class="text-primary">نحترفها</span></h2>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                    <div class="glass p-6 rounded-2xl border border-border flex flex-col items-center gap-4 hover:border-primary/30 transition-all reveal-y" style="transition-delay: 0.1s">
+                        <div class="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center text-primary"><i data-lucide="layout" class="w-6 h-6"></i></div>
+                        <span class="font-bold text-xs">AutoCAD</span>
                     </div>
-                    <div class="text-center group reveal-y" style="transition-delay: 0.2s">
-                        <div class="flex justify-center mb-6">
-                            <div class="w-14 h-14 rounded-2xl glass flex items-center justify-center text-yellow-500 group-hover:scale-110 transition-transform duration-500 shadow-xl">
-                                <i data-lucide="zap" class="w-6 h-6"></i>
-                            </div>
-                        </div>
-                        <h4 class="text-3xl md:text-5xl font-heading font-serif text-foreground mb-3">دقة</h4>
-                        <p class="text-xs md:text-sm text-muted-foreground font-medium uppercase tracking-widest">تصميم هيدروليكي بأعلى كفاءة</p>
+                    <div class="glass p-6 rounded-2xl border border-border flex flex-col items-center gap-4 hover:border-primary/30 transition-all reveal-y" style="transition-delay: 0.2s">
+                        <div class="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center text-primary"><i data-lucide="waves" class="w-6 h-6"></i></div>
+                        <span class="font-bold text-xs">WaterGEMS</span>
                     </div>
-                    <div class="text-center group reveal-y" style="transition-delay: 0.3s">
-                        <div class="flex justify-center mb-6">
-                            <div class="w-14 h-14 rounded-2xl glass flex items-center justify-center text-green-500 group-hover:scale-110 transition-transform duration-500 shadow-xl">
-                                <i data-lucide="tree-pine" class="w-6 h-6"></i>
-                            </div>
-                        </div>
-                        <h4 class="text-3xl md:text-5xl font-heading font-serif text-foreground mb-3">جودة</h4>
-                        <p class="text-xs md:text-sm text-muted-foreground font-medium uppercase tracking-widest">مساحات خضراء نابضة بالحياة</p>
+                    <div class="glass p-6 rounded-2xl border border-border flex flex-col items-center gap-4 hover:border-primary/30 transition-all reveal-y" style="transition-delay: 0.3s">
+                        <div class="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center text-primary"><i data-lucide="box" class="w-6 h-6"></i></div>
+                        <span class="font-bold text-xs">Civil 3D</span>
                     </div>
-                    <div class="text-center group reveal-y" style="transition-delay: 0.4s">
-                        <div class="flex justify-center mb-6">
-                            <div class="w-14 h-14 rounded-2xl glass flex items-center justify-center text-cyan-500 group-hover:scale-110 transition-transform duration-500 shadow-xl">
-                                <i data-lucide="wind" class="w-6 h-6"></i>
-                            </div>
-                        </div>
-                        <h4 class="text-3xl md:text-5xl font-heading font-serif text-foreground mb-3">ابتكار</h4>
-                        <p class="text-xs md:text-sm text-muted-foreground font-medium uppercase tracking-widest">تقنيات ري ذكية ومواكبة</p>
+                    <div class="glass p-6 rounded-2xl border border-border flex flex-col items-center gap-4 hover:border-primary/30 transition-all reveal-y" style="transition-delay: 0.4s">
+                        <div class="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center text-primary"><i data-lucide="calculator" class="w-6 h-6"></i></div>
+                        <span class="font-bold text-xs">EPANET</span>
+                    </div>
+                    <div class="glass p-6 rounded-2xl border border-border flex flex-col items-center gap-4 hover:border-primary/30 transition-all reveal-y" style="transition-delay: 0.5s">
+                        <div class="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center text-primary"><i data-lucide="cloud-rain" class="w-6 h-6"></i></div>
+                        <span class="font-bold text-xs">Irrigation CAD</span>
+                    </div>
+                    <div class="glass p-6 rounded-2xl border border-border flex flex-col items-center gap-4 hover:border-primary/30 transition-all reveal-y" style="transition-delay: 0.6s">
+                        <div class="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center text-primary"><i data-lucide="bar-chart" class="w-6 h-6"></i></div>
+                        <span class="font-bold text-xs">MS Project</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Smart Irrigation Innovations (Bento Grid) -->
+        <!-- Our Process -->
+        <section class="section-padding bg-background relative overflow-hidden">
+            <div class="container mx-auto relative z-10">
+                <div class="text-center mb-20 reveal-y">
+                    <span class="text-primary font-medium tracking-[0.3em] uppercase text-xs mb-4 block">منهجية العمل</span>
+                    <h2 class="text-4xl md:text-6xl font-heading font-serif text-foreground mb-6">رحلة المشروع <span class="text-primary">من الفكرة للتنفيذ</span></h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div class="relative p-8 glass rounded-3xl border border-border group reveal-y" style="transition-delay: 0.1s">
+                        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-all">
+                            <span class="font-bold">01</span>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4">الدراسة والمساحة</h4>
+                        <p class="text-muted-foreground text-sm font-light">رفع مساحي دقيق للموقع ودراسة نوع التربة ومصادر المياه المتاحة.</p>
+                    </div>
+                    <div class="relative p-8 glass rounded-3xl border border-border group reveal-y" style="transition-delay: 0.2s">
+                        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-all">
+                            <span class="font-bold">02</span>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4">التصميم الهيدروليكي</h4>
+                        <p class="text-muted-foreground text-sm font-light">استخدام البرامج الهندسية لتصميم شبكة ري تضمن أعلى كفاءة توزيع.</p>
+                    </div>
+                    <div class="relative p-8 glass rounded-3xl border border-border group reveal-y" style="transition-delay: 0.3s">
+                        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-all">
+                            <span class="font-bold">03</span>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4">التوريد والتركيب</h4>
+                        <p class="text-muted-foreground text-sm font-light">اختيار أجود الخامات العالمية والإشراف الدقيق على مراحل التركيب.</p>
+                    </div>
+                    <div class="relative p-8 glass rounded-3xl border border-border group reveal-y" style="transition-delay: 0.4s">
+                        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-all">
+                            <span class="font-bold">04</span>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4">التشغيل والدعم</h4>
+                        <p class="text-muted-foreground text-sm font-light">اختبار النظام بالكامل وتدريب العميل على برمجة لوحات التحكم الذكية.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Stats (Redesigned) -->
+        <section class="py-24 bg-background relative overflow-hidden">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--primary)_0%,_transparent_70%)] opacity-[0.03] pointer-events-none"></div>
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Stat 1 -->
+                    <div class="glass p-8 rounded-[2.5rem] border border-border group hover:border-primary/30 transition-all duration-700 reveal-y" style="transition-delay: 0.1s">
+                        <div class="flex items-center gap-6">
+                            <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-500 shadow-inner">
+                                <i data-lucide="check-circle" class="w-8 h-8"></i>
+                            </div>
+                            <div class="text-right">
+                                <div class="stat-number text-4xl font-heading font-serif text-foreground mb-1">+150</div>
+                                <p class="text-muted-foreground text-[10px] uppercase tracking-widest font-bold">مشروع منفذ</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Stat 2 -->
+                    <div class="glass p-8 rounded-[2.5rem] border border-border group hover:border-primary/30 transition-all duration-700 reveal-y" style="transition-delay: 0.2s">
+                        <div class="flex items-center gap-6">
+                            <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-500 shadow-inner">
+                                <i data-lucide="droplets" class="w-8 h-8"></i>
+                            </div>
+                            <div class="text-right">
+                                <div class="stat-number text-4xl font-heading font-serif text-foreground mb-1">30%</div>
+                                <p class="text-muted-foreground text-[10px] uppercase tracking-widest font-bold">توفير مياه</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Stat 3 -->
+                    <div class="glass p-8 rounded-[2.5rem] border border-border group hover:border-primary/30 transition-all duration-700 reveal-y" style="transition-delay: 0.3s">
+                        <div class="flex items-center gap-6">
+                            <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-500 shadow-inner">
+                                <i data-lucide="map" class="w-8 h-8"></i>
+                            </div>
+                            <div class="text-right">
+                                <div class="stat-number text-4xl font-heading font-serif text-foreground mb-1">+10k</div>
+                                <p class="text-muted-foreground text-[10px] uppercase tracking-widest font-bold">فدان مروي</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Stat 4 -->
+                    <div class="glass p-8 rounded-[2.5rem] border border-border group hover:border-primary/30 transition-all duration-700 reveal-y" style="transition-delay: 0.4s">
+                        <div class="flex items-center gap-6">
+                            <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-500 shadow-inner">
+                                <i data-lucide="book-open" class="w-8 h-8"></i>
+                            </div>
+                            <div class="text-right">
+                                <div class="stat-number text-4xl font-heading font-serif text-foreground mb-1">12</div>
+                                <p class="text-muted-foreground text-[10px] uppercase tracking-widest font-bold">بحث علمي</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <section class="section-padding bg-muted/30 relative overflow-hidden">
             <div class="container mx-auto relative z-10 px-6">
                 <div class="text-center mb-16 reveal-y">
@@ -315,7 +426,55 @@
             </div>
         </section>
 
-        <!-- CTA Cards for Multi-page -->
+        <!-- Water Savings Calculator -->
+        <section class="section-padding bg-muted/20 relative overflow-hidden">
+            <div class="container mx-auto">
+                <div class="glass p-12 md:p-20 rounded-[3rem] border border-border bg-card/50 relative overflow-hidden reveal-scale">
+                    <div class="flex flex-col lg:flex-row gap-16 items-center">
+                        <div class="lg:w-1/2 text-right">
+                            <span class="text-primary font-medium tracking-[0.3em] uppercase text-xs mb-4 block">أداة هندسية</span>
+                            <h2 class="text-4xl font-heading font-serif mb-8 text-foreground">احسب مقدار <span class="text-primary">التوفير المتوقع</span></h2>
+                            <p class="text-muted-foreground text-lg font-light leading-relaxed mb-10">
+                                استخدم هذه الأداة البسيطة لتقدير كمية المياه التي يمكن توفيرها عند التحويل من الري التقليدي (الغمر) إلى أنظمة الري الحديثة والذكية.
+                            </p>
+                            <div class="space-y-6">
+                                <div class="p-6 bg-primary/5 rounded-2xl border border-primary/10">
+                                    <h4 class="font-bold text-primary mb-2 text-xl">ملحوظة هندسية</h4>
+                                    <p class="text-sm text-muted-foreground">هذه الحسابات تقديرية وتعتمد على متوسط كفاءة النظم العالمية (الري بالتنقيط تصل كفاءته إلى 95%).</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:w-1/2 w-full">
+                            <div class="glass p-8 md:p-10 rounded-3xl border border-primary/20 bg-background shadow-2xl">
+                                <div class="space-y-8">
+                                    <div>
+                                        <label class="block text-sm font-bold mb-4 opacity-70">المساحة الإجمالية (بالفدان)</label>
+                                        <input type="number" id="area-input" value="10" class="w-full px-6 py-4 rounded-2xl bg-muted/30 border border-border focus:border-primary outline-none transition-all text-xl font-bold">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold mb-4 opacity-70">نوع المحصول</label>
+                                        <select id="crop-select" class="w-full px-6 py-4 rounded-2xl bg-muted/30 border border-border focus:border-primary outline-none transition-all text-lg font-medium">
+                                            <option value="4000">أشجار فاكهة (احتياج متوسط)</option>
+                                            <option value="6000">محاصيل حقلية (احتياج عالٍ)</option>
+                                            <option value="2500">نباتات زينة (احتياج منخفض)</option>
+                                        </select>
+                                    </div>
+                                    <button onclick="calculateSavings()" class="w-full py-5 bg-primary text-white rounded-2xl font-bold text-xl hover:bg-primary-dark transition-all shadow-xl">
+                                        احسب التوفير السنوي
+                                    </button>
+                                    <div id="calc-result" class="hidden pt-8 border-t border-border animate-fade-in">
+                                        <div class="text-center">
+                                            <p class="text-muted-foreground text-sm mb-2">توفير مياه يصل إلى:</p>
+                                            <p class="text-4xl md:text-5xl font-heading font-serif text-primary"><span id="savings-value">0</span> م³ / سنة</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <section class="section-padding bg-background">
             <div class="container mx-auto">
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -346,6 +505,22 @@
                 </div>
             </div>
         </section>
+        <!-- Final Contact CTA -->
+        <section class="py-32 bg-background relative overflow-hidden">
+            <div class="container mx-auto px-6">
+                <div class="glass p-16 md:p-24 rounded-[4rem] border border-primary/20 bg-primary/5 text-center relative overflow-hidden reveal-scale">
+                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--primary)_0%,_transparent_100%)] opacity-[0.05]"></div>
+                    <div class="relative z-10 max-w-3xl mx-auto">
+                        <h2 class="text-4xl md:text-6xl font-heading font-serif text-foreground mb-8 leading-tight">جاهز للبدء في <br> <span class="text-primary">مشروعك القادم؟</span></h2>
+                        <p class="text-xl text-muted-foreground mb-12 font-light leading-relaxed">دعنا نناقش كيف يمكننا تحويل رؤيتك إلى واقع هندسي مستدام وبأعلى معايير الكفاءة العالمية.</p>
+                        <div class="flex flex-wrap justify-center gap-6">
+                            <a href="contact.html" class="px-12 py-5 bg-primary text-white rounded-full font-bold text-xl hover:bg-primary-dark transition-all shadow-2xl shadow-primary/20">تواصل معي الآن</a>
+                            <a href="https://wa.me/201062756257" target="_blank" rel="noopener noreferrer" class="px-12 py-5 glass text-foreground rounded-full font-bold text-xl hover:bg-foreground/5 transition-all border border-foreground/10">واتساب</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
@@ -364,23 +539,33 @@
                         نؤمن بأن هندسة الري هي قلب كل مساحة خضراء نابضة. ندمج المعرفة العلمية بالتقنيات الحديثة لنصنع بيئات مستدامة تليق بطموحكم.
                     </p>
                     <div class="flex gap-4 justify-end">
-                        <a href="https://www.linkedin.com/in/ahmed-moparak-273a94241" target="_blank" class="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-all duration-500 bg-card/5 shadow-sm">
+                        <a href="https://www.linkedin.com/in/ahmed-moparak-273a94241" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-all duration-500 bg-card/5 shadow-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                         </a>
-                        <a href="#" class="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-all duration-500 bg-card/5 shadow-sm">
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-all duration-500 bg-card/5 shadow-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y1="6.5"/></svg>
                         </a>
-                        <a href="https://facebook.com" class="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-all duration-500 bg-card/5 shadow-sm">
+                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-all duration-500 bg-card/5 shadow-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                         </a>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-16 lg:gap-32 text-right">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 lg:gap-32 text-right">
+                    <div>
+                        <h5 class="text-primary text-[10px] uppercase tracking-widest font-bold mb-8">النشرة العلمية</h5>
+                        <p class="text-muted-foreground text-xs mb-6 font-light">اشترك لتصلك أحدث الأبحاث والمقالات في هندسة الري.</p>
+                        <form class="flex gap-2">
+                            <input type="email" placeholder="بريدك الإلكتروني" class="flex-1 bg-muted/30 border border-border rounded-xl px-4 py-2 text-sm outline-none focus:border-primary transition-all">
+                            <button class="bg-primary text-white p-2 rounded-xl hover:bg-primary-dark transition-all">
+                                <i data-lucide="send" class="w-4 h-4"></i>
+                            </button>
+                        </form>
+                    </div>
                     <div>
                         <h5 class="text-primary text-[10px] uppercase tracking-widest font-bold mb-8">التنقل</h5>
                         <ul class="space-y-4 text-muted-foreground text-sm font-medium">
-                            <li><a href="index.html" class="text-primary transition-colors flex items-center gap-3 justify-end font-bold"><span>الرئيسية</span> <i data-lucide="home" class="w-4 h-4"></i></a></li>
+                            <li><a href="index.html" class="hover:text-primary transition-colors flex items-center gap-3 justify-end"><span>الرئيسية</span> <i data-lucide="home" class="w-4 h-4"></i></a></li>
                             <li><a href="about.html" class="hover:text-primary transition-colors flex items-center gap-3 justify-end"><span>من أنا</span> <i data-lucide="user" class="w-4 h-4"></i></a></li>
                             <li><a href="services.html" class="hover:text-primary transition-colors flex items-center gap-3 justify-end"><span>الخدمات</span> <i data-lucide="cog" class="w-4 h-4"></i></a></li>
                             <li><a href="portfolio.html" class="hover:text-primary transition-colors flex items-center gap-3 justify-end"><span>الأعمال</span> <i data-lucide="briefcase" class="w-4 h-4"></i></a></li>
@@ -404,6 +589,11 @@
             </div>
         </div>
     </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/201062756257" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <i data-lucide="message-circle" class="w-8 h-8"></i>
+    </a>
 
     <!-- Script -->
     <script src="script.js"></script>

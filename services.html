@@ -9,7 +9,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,9 +19,6 @@
     
     <!-- Custom Style -->
     <link rel="stylesheet" href="style.css">
-    
-    
-    
     
     <script>
         tailwind.config = {
@@ -40,9 +37,9 @@
                         'muted-foreground': 'var(--muted-foreground)',
                     },
                     fontFamily: {
-                        heading: ['Urbanist', 'sans-serif'],
-                        serif: ['Urbanist', 'sans-serif'],
+                        heading: ['Readex Pro', 'sans-serif'],
                         body: ['Readex Pro', 'sans-serif'],
+                        serif: ['Readex Pro', 'sans-serif'],
                     },
                 }
             }
@@ -50,6 +47,17 @@
     </script>
 </head>
 <body class="bg-background text-foreground transition-colors duration-300">
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="loader-logo">
+            <i data-lucide="leaf" class="text-primary w-8 h-8"></i>
+        </div>
+        <div class="loader-bar">
+            <div id="loader-progress" class="loader-progress"></div>
+        </div>
+        <p class="text-[10px] uppercase tracking-[0.3em] text-primary font-bold mt-4">جاري التحميل...</p>
+    </div>
+
     <!-- Noise Texture -->
     <div class="noise"></div>
 
@@ -139,6 +147,15 @@
                     </p>
                 </div>
 
+                <!-- Partners Strip -->
+                <div class="mb-24 py-8 border-y border-primary/10 opacity-30 grayscale flex flex-wrap justify-center gap-12 text-sm font-bold tracking-widest reveal-y">
+                    <span>HUNTER</span>
+                    <span>RAIN BIRD</span>
+                    <span>TORO</span>
+                    <span>NETAFIM</span>
+                    <span>GRUNDFOS</span>
+                </div>
+
                 <div class="grid lg:grid-cols-3 gap-8 mb-20">
                     <!-- Service 1 -->
                     <div class="group relative h-full reveal-y" style="transition-delay: 0.1s">
@@ -208,7 +225,48 @@
                     </div>
                 </div>
 
-                <div class="glass p-12 rounded-[2rem] border border-primary/20 bg-primary/5 text-center reveal-scale">
+                <!-- FAQ Section -->
+                <div class="mt-32 max-w-4xl mx-auto">
+                    <div class="text-center mb-16 reveal-y">
+                        <span class="text-primary font-medium tracking-[0.3em] uppercase text-xs mb-4 block">الأسئلة الشائعة</span>
+                        <h2 class="text-3xl md:text-4xl font-heading font-serif text-foreground">كل ما تريد <span class="text-primary">معرفته</span></h2>
+                    </div>
+
+                    <div class="space-y-4 reveal-y">
+                        <!-- FAQ Item 1 -->
+                        <div class="glass rounded-2xl border border-border overflow-hidden">
+                            <button class="w-full p-6 text-right flex justify-between items-center group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.icon').classList.toggle('rotate-180')">
+                                <span class="text-lg font-bold">ما هي مدة تنفيذ مشروع ري متكامل؟</span>
+                                <i data-lucide="chevron-down" class="icon w-5 h-5 text-primary transition-transform"></i>
+                            </button>
+                            <div class="p-6 pt-0 text-muted-foreground font-light leading-relaxed hidden">
+                                تختلف المدة حسب مساحة المشروع وتعقيده، ولكن عادة ما تستغرق المشاريع السكنية من 7 إلى 14 يوم عمل، بينما المشاريع الزراعية الكبرى تعتمد على جدول زمني محدد بعد الدراسة.
+                            </div>
+                        </div>
+                        <!-- FAQ Item 2 -->
+                        <div class="glass rounded-2xl border border-border overflow-hidden">
+                            <button class="w-full p-6 text-right flex justify-between items-center group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.icon').classList.toggle('rotate-180')">
+                                <span class="text-lg font-bold">هل توفرون ضماناً على الأنظمة المنفذة؟</span>
+                                <i data-lucide="chevron-down" class="icon w-5 h-5 text-primary transition-transform"></i>
+                            </button>
+                            <div class="p-6 pt-0 text-muted-foreground font-light leading-relaxed hidden">
+                                نعم، نقدم ضماناً كاملاً على التصميم والتنفيذ لمدة عام، بالإضافة إلى ضمان الوكيل على المكونات (مثل المضخات ولوحات التحكم) والذي قد يصل إلى 5 سنوات.
+                            </div>
+                        </div>
+                        <!-- FAQ Item 3 -->
+                        <div class="glass rounded-2xl border border-border overflow-hidden">
+                            <button class="w-full p-6 text-right flex justify-between items-center group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.icon').classList.toggle('rotate-180')">
+                                <span class="text-lg font-bold">هل يمكن تحويل نظام ري قديم إلى نظام ري ذكي؟</span>
+                                <i data-lucide="chevron-down" class="icon w-5 h-5 text-primary transition-transform"></i>
+                            </button>
+                            <div class="p-6 pt-0 text-muted-foreground font-light leading-relaxed hidden">
+                                بالتأكيد، نقوم بعملية "Upgrading" للأنظمة القديمة عن طريق إضافة حساسات الرطوبة ولوحات التحكم الذكية (Smart Controllers) التي تعمل عبر الواي فاي، مما يوفر الكثير من المياه المهدورة.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass p-12 rounded-[2rem] border border-primary/20 bg-primary/5 text-center reveal-scale mt-24">
                     <h3 class="text-3xl font-heading font-serif text-foreground mb-6">هل تبحث عن حلول مخصصة لمشروعك؟</h3>
                     <p class="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto font-light">
                         نحن نقدم استشارات هندسية متكاملة تبدأ من دراسة الجدوى وحتى التشغيل النهائي. دعنا نناقش كيف يمكننا رفع كفاءة مشروعك.
@@ -238,19 +296,29 @@
                         نؤمن بأن هندسة الري هي قلب كل مساحة خضراء نابضة. ندمج المعرفة العلمية بالتقنيات الحديثة لنصنع بيئات مستدامة تليق بطموحكم.
                     </p>
                     <div class="flex gap-4 justify-end">
-                        <a href="https://www.linkedin.com/in/ahmed-moparak-273a94241" target="_blank" class="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-all duration-500 bg-card/5 shadow-sm">
+                        <a href="https://www.linkedin.com/in/ahmed-moparak-273a94241" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-all duration-500 bg-card/5 shadow-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                         </a>
-                        <a href="#" class="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-all duration-500 bg-card/5 shadow-sm">
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-all duration-500 bg-card/5 shadow-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y1="6.5"/></svg>
                         </a>
-                        <a href="https://facebook.com" class="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-all duration-500 bg-card/5 shadow-sm">
+                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-all duration-500 bg-card/5 shadow-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                         </a>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-16 lg:gap-32 text-right">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 lg:gap-32 text-right">
+                    <div>
+                        <h5 class="text-primary text-[10px] uppercase tracking-widest font-bold mb-8">النشرة العلمية</h5>
+                        <p class="text-muted-foreground text-xs mb-6 font-light">اشترك لتصلك أحدث الأبحاث والمقالات في هندسة الري.</p>
+                        <form class="flex gap-2">
+                            <input type="email" placeholder="بريدك الإلكتروني" class="flex-1 bg-muted/30 border border-border rounded-xl px-4 py-2 text-sm outline-none focus:border-primary transition-all">
+                            <button class="bg-primary text-white p-2 rounded-xl hover:bg-primary-dark transition-all">
+                                <i data-lucide="send" class="w-4 h-4"></i>
+                            </button>
+                        </form>
+                    </div>
                     <div>
                         <h5 class="text-primary text-[10px] uppercase tracking-widest font-bold mb-8">التنقل</h5>
                         <ul class="space-y-4 text-muted-foreground text-sm font-medium">
@@ -278,6 +346,11 @@
             </div>
         </div>
     </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/201062756257" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <i data-lucide="message-circle" class="w-8 h-8"></i>
+    </a>
 
     <!-- Script -->
     <script src="script.js"></script>
