@@ -52,6 +52,16 @@ document.addEventListener('DOMContentLoaded', () => {
             mouseY = e.clientY;
             cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
             isMouseMoving = true;
+
+            // Update mouse position for profile glow
+            const profileContainer = document.querySelector('.group.cursor-none');
+            if (profileContainer) {
+                const rect = profileContainer.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                profileContainer.style.setProperty('--mouse-x', `${x}%`);
+                profileContainer.style.setProperty('--mouse-y', `${y}%`);
+            }
         }, { passive: true });
 
         const animateCursor = () => {
@@ -334,11 +344,31 @@ function calculateSavings() {
 
     if (area && area > 0) {
         // Simple logic: Traditional flooding uses ~40% more water than smart drip irrigation
-        // Formula: Area * Crop Need per Faddan * 0.4 (savings factor)
-        const savings = Math.round(area * cropNeed * 0.4);
+        const targetSavings = Math.round(area * cropNeed * 0.4);
         
-        savingsSpan.innerText = savings.toLocaleString();
         resultDiv.classList.remove('hidden');
+        
+        // Animate counter
+        let current = 0;
+        const duration = 1500;
+        const startTime = performance.now();
+        
+        function updateCounter(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Ease out cubic
+            const easedProgress = 1 - Math.pow(1 - progress, 3);
+            current = Math.floor(easedProgress * targetSavings);
+            
+            savingsSpan.innerText = current.toLocaleString();
+            
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+            }
+        }
+        
+        requestAnimationFrame(updateCounter);
         
         // Scroll to result if on mobile
         if (window.innerWidth < 768) {

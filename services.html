@@ -18,7 +18,19 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <!-- Custom Style -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2.1">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ahmed-moparak.netlify.app/services.html">
+    <meta property="og:title" content="الخدمات | أحمد مبارك">
+    <meta property="og:description" content="خدمات هندسة الري المتقدمة، تحليل التربة، والإشراف الفني. حلول هندسية ذكية لترشيد المياه وزيادة الإنتاجية.">
+    <meta property="og:image" content="https://ahmed-moparak.netlify.app/public/og-image.png">
     
     <script>
         tailwind.config = {
@@ -225,6 +237,60 @@
                     </div>
                 </div>
 
+                <!-- Irrigation Savings Calculator (Lead Magnet) -->
+                <div class="mt-32 reveal-scale">
+                    <div class="glass p-12 md:p-20 rounded-[3rem] border border-primary/20 bg-primary/5 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--primary)_0%,_transparent_100%)] opacity-[0.05]"></div>
+                        <div class="relative z-10 flex flex-col lg:flex-row gap-16 items-center">
+                            <div class="lg:w-1/2 text-right">
+                                <span class="text-primary font-medium tracking-[0.3em] uppercase text-xs mb-4 block">أداة هندسية مجانية</span>
+                                <h2 class="text-4xl font-heading font-serif mb-8 text-foreground">احسب مقدار <span class="text-primary">التوفير السنوي</span></h2>
+                                <p class="text-muted-foreground text-lg font-light leading-relaxed mb-10">
+                                    هل تعلم أن التحويل للري الحديث قد يوفر لك آلاف الأمتار المكعبة من المياه سنوياً؟ استخدم حاسبتنا الهندسية لتقدير العائد على الاستثمار.
+                                </p>
+                                <div class="flex items-center gap-6 justify-end">
+                                    <div class="text-center">
+                                        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mx-auto mb-2"><i data-lucide="zap" class="w-6 h-6"></i></div>
+                                        <p class="text-[10px] font-bold uppercase text-muted-foreground">نتائج لحظية</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mx-auto mb-2"><i data-lucide="check-check" class="w-6 h-6"></i></div>
+                                        <p class="text-[10px] font-bold uppercase text-muted-foreground">دقة هندسية</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lg:w-1/2 w-full">
+                                <div class="glass p-8 md:p-10 rounded-3xl border border-primary/20 bg-background shadow-2xl">
+                                    <div class="space-y-8">
+                                        <div>
+                                            <label class="block text-sm font-bold mb-4 opacity-70">المساحة الإجمالية (بالفدان)</label>
+                                            <input type="number" id="area-input" value="10" class="w-full px-6 py-4 rounded-2xl bg-muted/30 border border-border focus:border-primary outline-none transition-all text-xl font-bold">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-bold mb-4 opacity-70">نوع المحصول</label>
+                                            <select id="crop-select" class="w-full px-6 py-4 rounded-2xl bg-muted/30 border border-border focus:border-primary outline-none transition-all text-lg font-medium">
+                                                <option value="4000">أشجار فاكهة (احتياج متوسط)</option>
+                                                <option value="6000">محاصيل حقلية (احتياج عالٍ)</option>
+                                                <option value="2500">نباتات زينة (احتياج منخفض)</option>
+                                            </select>
+                                        </div>
+                                        <button onclick="calculateSavings()" class="w-full py-5 bg-primary text-white rounded-2xl font-bold text-xl hover:bg-primary-dark transition-all shadow-xl">
+                                            احسب التوفير الآن
+                                        </button>
+                                        <div id="calc-result" class="hidden pt-8 border-t border-border animate-fade-in">
+                                            <div class="text-center">
+                                                <p class="text-muted-foreground text-sm mb-2">توفير مياه تقديري يصل إلى:</p>
+                                                <p class="text-4xl md:text-5xl font-heading font-serif text-primary"><span id="savings-value">0</span> م³ / سنة</p>
+                                                <p class="text-[10px] text-muted-foreground mt-4 italic">* هذه الحسابات تقديرية وتخضع للمعاينة الميدانية</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- FAQ Section -->
                 <div class="mt-32 max-w-4xl mx-auto">
                     <div class="text-center mb-16 reveal-y">
@@ -299,11 +365,8 @@
                         <a href="https://www.linkedin.com/in/ahmed-moparak-273a94241" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-all duration-500 bg-card/5 shadow-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                         </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-all duration-500 bg-card/5 shadow-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y1="6.5"/></svg>
-                        </a>
-                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-all duration-500 bg-card/5 shadow-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        <a href="https://wa.me/201062756257" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-all duration-500 bg-card/5 shadow-sm">
+                            <i data-lucide="message-circle" class="w-5 h-5"></i>
                         </a>
                     </div>
                 </div>
@@ -353,6 +416,6 @@
     </a>
 
     <!-- Script -->
-    <script src="script.js"></script>
+    <script src="script.js?v=2.1"></script>
 </body>
 </html>
