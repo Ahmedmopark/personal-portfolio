@@ -15,10 +15,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@0.372.0"></script>
     
     <!-- Custom Style -->
-    <link rel="stylesheet" href="style.css?v=2.1">
+    <link rel="stylesheet" href="style.css?v=3.1">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -81,9 +81,12 @@
     </div>
 
 
+    <!-- Noise Texture -->
+    <div class="noise" aria-hidden="true"></div>
+
     <!-- Custom Cursor -->
-    <div id="cursor-dot" class="cursor-dot hidden md:block"></div>
-    <div id="cursor-follower" class="cursor-follower hidden md:block"></div>
+    <div id="cursor-dot" class="cursor-dot hidden" aria-hidden="true"></div>
+    <div id="cursor-follower" class="cursor-follower hidden" aria-hidden="true"></div>
 
     <!-- Background Blobs -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10 bg-background">
@@ -109,12 +112,12 @@
             <!-- Desktop Links -->
             <div class="hidden lg:flex items-center gap-10">
                 <div class="flex items-center gap-8">
-                    <a href="index.html" class="text-primary transition-all font-body text-sm font-bold tracking-wide">الرئيسية</a>
-                    <a href="about.html" class="text-foreground/70 hover:text-primary transition-all font-body text-sm font-medium tracking-wide">من أنا</a>
-                    <a href="services.html" class="text-foreground/70 hover:text-primary transition-all font-body text-sm font-medium tracking-wide">الخدمات</a>
-                    <a href="portfolio.html" class="text-foreground/70 hover:text-primary transition-all font-body text-sm font-medium tracking-wide">أعمالي</a>
-                    <a href="articles.html" class="text-foreground/70 hover:text-primary transition-all font-body text-sm font-medium tracking-wide">مقالات علمية</a>
-                    <a href="contact.html" class="text-foreground/70 hover:text-primary transition-all font-body text-sm font-medium tracking-wide">تواصل معي</a>
+                    <a href="index.html" class="nav-link-item">الرئيسية</a>
+                    <a href="about.html" class="nav-link-item">من أنا</a>
+                    <a href="services.html" class="nav-link-item">الخدمات</a>
+                    <a href="portfolio.html" class="nav-link-item">أعمالي</a>
+                    <a href="articles.html" class="nav-link-item">مقالات علمية</a>
+                    <a href="contact.html" class="nav-link-item">تواصل معي</a>
                 </div>
                 
                 <div class="flex items-center gap-4 border-r border-foreground/10 pr-6 mr-2">
@@ -202,8 +205,7 @@
                         </div>
 
                         <h1 class="text-5xl md:text-7xl font-heading font-serif text-foreground leading-tight mb-8 tracking-tight">
-                            <span class="block opacity-95 drop-shadow-sm">أصمم أنظمة ري</span>
-                            <span class="block text-primary gradient-text drop-shadow-lg">موفّرة للمياه</span>
+                            <span id="typing-text" class="block gradient-text drop-shadow-lg min-h-[1.2em]"></span><span class="typing-cursor"></span>
                         </h1>
 
                         <p class="text-xl md:text-2xl text-foreground/85 mb-12 leading-relaxed max-w-2xl font-light">
@@ -211,13 +213,13 @@
                         </p>
 
                         <div class="flex flex-wrap gap-6 justify-start">
-                            <a href="portfolio.html" class="group relative px-10 py-4 bg-primary text-white rounded-full font-bold text-lg overflow-hidden transition-all hover:bg-primary-dark shadow-xl hover:shadow-primary/20">
+                            <a href="portfolio.html" class="btn-primary magnetic px-10 py-4 text-lg flex items-center gap-2 ripple-btn">
                                 <span class="relative z-10 flex items-center gap-2">
-                                    <i data-lucide="arrow-left" class="w-5 h-5 transition-transform group-hover:-translate-x-1"></i>
+                                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
                                     <span>استكشاف المشاريع</span>
                                 </span>
                             </a>
-                            <a href="public/cv.png" download class="px-10 py-4 glass text-foreground rounded-full font-bold text-lg hover:bg-foreground/5 transition-all border border-foreground/10 flex items-center gap-3">
+                            <a href="public/cv.png" download class="btn-secondary px-10 py-4 text-lg flex items-center gap-3 glass">
                                 <i data-lucide="download" class="w-5 h-5"></i>
                                 <span>تحميل السيرة الذاتية</span>
                             </a>
@@ -232,7 +234,7 @@
                                 <div class="absolute inset-0 border-2 border-primary/20 rounded-full scale-105 animate-pulse opacity-50"></div>
                                 <div class="absolute inset-0 border border-accent-green/30 rounded-full scale-110 animate-[spin_25s_linear_infinite_reverse]"></div>
                                 
-                                <div class="relative h-full w-full rounded-full overflow-hidden border-2 border-primary/20 shadow-2xl group cursor-none">
+                                <div class="relative h-full w-full rounded-full overflow-hidden border-2 border-primary/20 shadow-2xl group profile-zone">
                                     <img src="public/profile.png" alt="أحمد محمد مبارك" class="absolute inset-0 w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-110" loading="lazy" decoding="async">
                                     <div class="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent opacity-60"></div>
                                     
@@ -247,15 +249,33 @@
             </div>
         </section>
 
-        <!-- Trusted Technologies -->
-        <section class="py-12 bg-background/50 border-y border-border/50">
-            <div class="container mx-auto px-6">
-                <div class="flex flex-wrap justify-center items-center gap-10 md:gap-20 opacity-30 grayscale hover:opacity-60 transition-all duration-700">
-                    <span class="font-bold text-lg">HUNTER</span>
-                    <span class="font-bold text-lg">RAIN BIRD</span>
-                    <span class="font-bold text-lg">TORO</span>
-                    <span class="font-bold text-lg">NETAFIM</span>
-                    <span class="font-bold text-lg">GRUNDFOS</span>
+        <!-- Trusted Technologies Marquee -->
+        <section class="py-10 bg-background border-y border-border/40">
+            <div class="marquee-wrap">
+                <div class="marquee-track">
+                    <span class="font-bold text-sm tracking-widest opacity-40 hover:opacity-80 transition-opacity uppercase">HUNTER</span>
+                    <span class="text-primary/30">◆</span>
+                    <span class="font-bold text-sm tracking-widest opacity-40 hover:opacity-80 transition-opacity uppercase">RAIN BIRD</span>
+                    <span class="text-primary/30">◆</span>
+                    <span class="font-bold text-sm tracking-widest opacity-40 hover:opacity-80 transition-opacity uppercase">TORO</span>
+                    <span class="text-primary/30">◆</span>
+                    <span class="font-bold text-sm tracking-widest opacity-40 hover:opacity-80 transition-opacity uppercase">NETAFIM</span>
+                    <span class="text-primary/30">◆</span>
+                    <span class="font-bold text-sm tracking-widest opacity-40 hover:opacity-80 transition-opacity uppercase">GRUNDFOS</span>
+                    <span class="text-primary/30">◆</span>
+                    <span class="font-bold text-sm tracking-widest opacity-40 hover:opacity-80 transition-opacity uppercase">FAO</span>
+                    <span class="text-primary/30">◆</span>
+                    <span class="font-bold text-sm tracking-widest opacity-40 hover:opacity-80 transition-opacity uppercase">HUNTER</span>
+                    <span class="text-primary/30">◆</span>
+                    <span class="font-bold text-sm tracking-widest opacity-40 hover:opacity-80 transition-opacity uppercase">RAIN BIRD</span>
+                    <span class="text-primary/30">◆</span>
+                    <span class="font-bold text-sm tracking-widest opacity-40 hover:opacity-80 transition-opacity uppercase">TORO</span>
+                    <span class="text-primary/30">◆</span>
+                    <span class="font-bold text-sm tracking-widest opacity-40 hover:opacity-80 transition-opacity uppercase">NETAFIM</span>
+                    <span class="text-primary/30">◆</span>
+                    <span class="font-bold text-sm tracking-widest opacity-40 hover:opacity-80 transition-opacity uppercase">GRUNDFOS</span>
+                    <span class="text-primary/30">◆</span>
+                    <span class="font-bold text-sm tracking-widest opacity-40 hover:opacity-80 transition-opacity uppercase">FAO</span>
                 </div>
             </div>
         </section>
@@ -267,29 +287,29 @@
                     <span class="text-primary font-medium tracking-[0.3em] uppercase text-xs mb-4 block">الترسانة التقنية</span>
                     <h2 class="text-3xl md:text-4xl font-heading font-serif text-foreground mb-6">الأدوات التي <span class="text-primary">نحترفها</span></h2>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-                    <div class="glass p-6 rounded-2xl border border-border flex flex-col items-center gap-4 hover:border-primary/30 transition-all reveal-y" style="transition-delay: 0.1s">
-                        <div class="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center text-primary"><i data-lucide="layout" class="w-6 h-6"></i></div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
+                    <div class="tool-card tilt-card gradient-border glass p-6 rounded-2xl flex flex-col items-center gap-3 cursor-default reveal-y" style="--delay:0.1s" data-tooltip="تصميم شبكات الري">
+                        <div class="w-12 h-12 bg-primary/8 rounded-xl flex items-center justify-center text-primary"><i data-lucide="layout" class="w-6 h-6"></i></div>
                         <span class="font-bold text-xs">AutoCAD</span>
                     </div>
-                    <div class="glass p-6 rounded-2xl border border-border flex flex-col items-center gap-4 hover:border-primary/30 transition-all reveal-y" style="transition-delay: 0.2s">
-                        <div class="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center text-primary"><i data-lucide="waves" class="w-6 h-6"></i></div>
+                    <div class="tool-card tilt-card gradient-border glass p-6 rounded-2xl flex flex-col items-center gap-3 cursor-default reveal-y" style="--delay:0.15s" data-tooltip="تحليل شبكات المياه">
+                        <div class="w-12 h-12 bg-primary/8 rounded-xl flex items-center justify-center text-primary"><i data-lucide="waves" class="w-6 h-6"></i></div>
                         <span class="font-bold text-xs">WaterGEMS</span>
                     </div>
-                    <div class="glass p-6 rounded-2xl border border-border flex flex-col items-center gap-4 hover:border-primary/30 transition-all reveal-y" style="transition-delay: 0.3s">
-                        <div class="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center text-primary"><i data-lucide="box" class="w-6 h-6"></i></div>
+                    <div class="tool-card tilt-card gradient-border glass p-6 rounded-2xl flex flex-col items-center gap-3 cursor-default reveal-y" style="--delay:0.2s" data-tooltip="النمذجة ثلاثية الأبعاد">
+                        <div class="w-12 h-12 bg-primary/8 rounded-xl flex items-center justify-center text-primary"><i data-lucide="box" class="w-6 h-6"></i></div>
                         <span class="font-bold text-xs">Civil 3D</span>
                     </div>
-                    <div class="glass p-6 rounded-2xl border border-border flex flex-col items-center gap-4 hover:border-primary/30 transition-all reveal-y" style="transition-delay: 0.4s">
-                        <div class="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center text-primary"><i data-lucide="calculator" class="w-6 h-6"></i></div>
+                    <div class="tool-card tilt-card gradient-border glass p-6 rounded-2xl flex flex-col items-center gap-3 cursor-default reveal-y" style="--delay:0.25s" data-tooltip="محاكاة شبكات المياه">
+                        <div class="w-12 h-12 bg-primary/8 rounded-xl flex items-center justify-center text-primary"><i data-lucide="calculator" class="w-6 h-6"></i></div>
                         <span class="font-bold text-xs">EPANET</span>
                     </div>
-                    <div class="glass p-6 rounded-2xl border border-border flex flex-col items-center gap-4 hover:border-primary/30 transition-all reveal-y" style="transition-delay: 0.5s">
-                        <div class="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center text-primary"><i data-lucide="cloud-rain" class="w-6 h-6"></i></div>
-                        <span class="font-bold text-xs">Irrigation CAD</span>
+                    <div class="tool-card tilt-card gradient-border glass p-6 rounded-2xl flex flex-col items-center gap-3 cursor-default reveal-y" style="--delay:0.3s" data-tooltip="حسابات الري">
+                        <div class="w-12 h-12 bg-primary/8 rounded-xl flex items-center justify-center text-primary"><i data-lucide="cloud-rain" class="w-6 h-6"></i></div>
+                        <span class="font-bold text-xs">CROPWAT</span>
                     </div>
-                    <div class="glass p-6 rounded-2xl border border-border flex flex-col items-center gap-4 hover:border-primary/30 transition-all reveal-y" style="transition-delay: 0.6s">
-                        <div class="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center text-primary"><i data-lucide="bar-chart" class="w-6 h-6"></i></div>
+                    <div class="tool-card tilt-card gradient-border glass p-6 rounded-2xl flex flex-col items-center gap-3 cursor-default reveal-y" style="--delay:0.35s" data-tooltip="إدارة المشاريع">
+                        <div class="w-12 h-12 bg-primary/8 rounded-xl flex items-center justify-center text-primary"><i data-lucide="bar-chart" class="w-6 h-6"></i></div>
                         <span class="font-bold text-xs">MS Project</span>
                     </div>
                 </div>
@@ -478,13 +498,23 @@
                                             <option value="2500">نباتات زينة (احتياج منخفض)</option>
                                         </select>
                                     </div>
-                                    <button onclick="calculateSavings()" class="w-full py-5 bg-primary text-white rounded-2xl font-bold text-xl hover:bg-primary-dark transition-all shadow-xl">
-                                        احسب التوفير السنوي
+                                    <button onclick="calculateSavings()" class="btn-primary ripple-btn w-full py-5 text-xl font-bold">
+                                        <span>احسب التوفير السنوي</span>
                                     </button>
-                                    <div id="calc-result" class="hidden pt-8 border-t border-border animate-fade-in">
-                                        <div class="text-center">
-                                            <p class="text-muted-foreground text-sm mb-2">توفير مياه يصل إلى:</p>
-                                            <p class="text-4xl md:text-5xl font-heading font-serif text-primary"><span id="savings-value">0</span> م³ / سنة</p>
+                                    <div id="calc-result" class="hidden pt-8 border-t border-border">
+                                        <div class="grid grid-cols-3 gap-4 text-center">
+                                            <div class="p-4 bg-primary/5 rounded-2xl border border-primary/10">
+                                                <p class="text-muted-foreground text-xs mb-1">توفير مياه</p>
+                                                <p class="text-2xl font-bold text-primary"><span id="savings-value">0</span></p>
+                                            </div>
+                                            <div class="p-4 bg-blue-500/5 rounded-2xl border border-blue-500/10">
+                                                <p class="text-muted-foreground text-xs mb-1">نسبة التوفير</p>
+                                                <p class="text-2xl font-bold text-blue-500"><span id="savings-percent">0</span></p>
+                                            </div>
+                                            <div class="p-4 bg-amber-500/5 rounded-2xl border border-amber-500/10">
+                                                <p class="text-muted-foreground text-xs mb-1">توفير تقريبي</p>
+                                                <p class="text-2xl font-bold text-amber-500"><span id="savings-cost">0</span></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -612,6 +642,6 @@
     </a>
 
     <!-- Script -->
-    <script src="script.js?v=2.1"></script>
+    <script src="script.js?v=3.0"></script>
 </body>
 </html>

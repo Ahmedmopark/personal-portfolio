@@ -15,10 +15,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@0.372.0"></script>
     
     <!-- Custom Style -->
-    <link rel="stylesheet" href="style.css?v=2.1">
+    <link rel="stylesheet" href="style.css?v=3.0">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -74,8 +74,8 @@
     <div class="noise"></div>
 
     <!-- Custom Cursor -->
-    <div id="cursor-dot" class="cursor-dot hidden md:block"></div>
-    <div id="cursor-follower" class="cursor-follower hidden md:block"></div>
+    <div id="cursor-dot" class="cursor-dot hidden" aria-hidden="true"></div>
+    <div id="cursor-follower" class="cursor-follower hidden" aria-hidden="true"></div>
 
     <!-- Background Blobs -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10 bg-background">
@@ -101,12 +101,12 @@
             <!-- Desktop Links -->
             <div class="hidden lg:flex items-center gap-10">
                 <div class="flex items-center gap-8">
-                    <a href="index.html" class="text-foreground/70 hover:text-primary transition-all font-body text-sm font-medium tracking-wide">الرئيسية</a>
-                    <a href="about.html" class="text-foreground/70 hover:text-primary transition-all font-body text-sm font-medium tracking-wide">من أنا</a>
-                    <a href="services.html" class="text-foreground/70 hover:text-primary transition-all font-body text-sm font-medium tracking-wide">الخدمات</a>
-                    <a href="portfolio.html" class="text-foreground/70 hover:text-primary transition-all font-body text-sm font-medium tracking-wide">أعمالي</a>
-                    <a href="articles.html" class="text-primary transition-all font-body text-sm font-bold tracking-wide">مقالات علمية</a>
-                    <a href="contact.html" class="text-foreground/70 hover:text-primary transition-all font-body text-sm font-medium tracking-wide">تواصل معي</a>
+                    <a href="index.html" class="nav-link-item">الرئيسية</a>
+                    <a href="about.html" class="nav-link-item">من أنا</a>
+                    <a href="services.html" class="nav-link-item">الخدمات</a>
+                    <a href="portfolio.html" class="nav-link-item">أعمالي</a>
+                    <a href="articles.html" class="nav-link-item active">مقالات علمية</a>
+                    <a href="contact.html" class="nav-link-item">تواصل معي</a>
                 </div>
                 
                 <div class="flex items-center gap-4 border-r border-foreground/10 pr-6 mr-2">
@@ -173,9 +173,16 @@
                                         <p class="text-[10px] text-muted-foreground mt-1">أساسيات الري</p>
                                     </div>
                                 </a>
+                                <a href="#article-2" class="group flex items-start gap-4 p-3 rounded-xl hover:bg-primary/5 transition-all">
+                                    <span class="w-6 h-6 rounded-lg bg-primary/10 text-primary text-xs font-bold flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">٢</span>
+                                    <div class="flex-grow">
+                                        <p class="text-sm font-medium text-foreground group-hover:text-primary transition-colors">بتسقي كل يوم... وزرعتك بتموت؟</p>
+                                        <p class="text-[10px] text-muted-foreground mt-1">الاحتياج المائي الحقيقي</p>
+                                    </div>
+                                </a>
                                 <!-- Future Article Placeholder -->
                                 <div class="p-3 rounded-xl border border-border border-dashed opacity-50">
-                                    <p class="text-[10px] text-muted-foreground text-center">ترقبوا مقالات بحثية قريباً...</p>
+                                    <p class="text-[10px] text-muted-foreground text-center">ترقبوا المزيد من المقالات...</p>
                                 </div>
                             </nav>
                             
@@ -264,6 +271,292 @@
                         </div>
                     </article>
 
+                    <!-- Article 2 -->
+                    <article id="article-2" class="glass rounded-[2rem] border border-border overflow-hidden shadow-2xl reveal-scale bg-card/40 mt-16">
+                        <div class="p-8 md:p-12">
+                            <div class="flex items-center gap-4 mb-8">
+                                <span class="px-4 py-1.5 bg-primary/10 text-primary text-[10px] uppercase font-bold tracking-widest rounded-full border border-primary/20">مقالات علمية</span>
+                                <span class="px-4 py-1.5 bg-muted/30 text-muted-foreground text-[10px] uppercase font-bold tracking-widest rounded-full border border-border">علم الري الحديث</span>
+                                <span class="text-muted-foreground text-xs font-medium mr-auto">29 أبريل 2026</span>
+                            </div>
+
+                            <h4 class="text-3xl md:text-5xl font-heading font-serif text-foreground mb-10 leading-tight">
+                                بتسقي كل يوم... وزرعتك بتموت؟ <span class="text-primary block mt-2 text-2xl md:text-3xl">الحقيقة اللي محدش بيقولهالك عن الاحتياج المائي الحقيقي للمحصول</span>
+                            </h4>
+
+                            <div class="prose prose-lg prose-green max-w-none text-foreground/80 leading-relaxed font-light space-y-8 text-right">
+                                <p class="text-xl font-medium text-foreground leading-relaxed">
+                                    بتسقي كل يوم بانتظام، بتدي الزرع مياه وافرة، وبرضو في يوم من الأيام بتلاقي الأوراق صفرا أو بتلف أو المحصول جاء ضعيف... وبتقول "مش عارف إيه المشكلة!"
+                                </p>
+                                
+                                <p>
+                                    المشكلة مش في المياه. المشكلة إنك بتسقي بالخرطوم... مش بالعلم.
+                                </p>
+
+                                <div class="bg-red-500/10 border-r-4 border-red-500 p-8 rounded-l-2xl my-8">
+                                    <p class="text-foreground font-medium m-0">في الواقع، <span class="font-bold text-red-500">٧٠٪ من مياه الري في مصر بتتهدر</span> — مش بسبب الجفاف ولا قلة المصادر، لكن بسبب إن صاحب المزرعة أو حتى المهندس نفسه مش عارف المحصول محتاج كام ليتر بالظبط، في أنهي وقت، وإزاي.</p>
+                                    <p class="mt-2 text-muted-foreground">وده بالظبط اللي هنتكلم عنه النهارده.</p>
+                                </div>
+
+                                <div class="space-y-6 mt-12">
+                                    <h5 class="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
+                                        <i data-lucide="droplets" class="text-primary w-6 h-6"></i>
+                                        أولاً: ليه الزيادة والنقص في المياه كلاهما خطر؟
+                                    </h5>
+                                    <p>النبتة كائن حي بيتنفس ويتعرق زيك تماماً. هي مش بس محتاجة مياه للشرب — هي محتاجة نسبة رطوبة معينة في التربة حواليها عشان جذورها تقدر تامتص العناصر الغذائية.</p>
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+                                        <div class="p-6 rounded-2xl bg-orange-500/5 border border-orange-500/20">
+                                            <div class="flex items-center gap-3 mb-4">
+                                                <i data-lucide="sun-dim" class="text-orange-500 w-6 h-6"></i>
+                                                <h6 class="font-bold text-orange-500">نقص المياه</h6>
+                                            </div>
+                                            <p class="text-sm text-foreground/80 leading-relaxed">التربة بتجف → الجذور مش قادرة تشتغل → النبات بيتعرض للإجهاد المائي (Water Stress) → الأوراق بتلف وبتصفر والمحصول بيضعف.</p>
+                                        </div>
+                                        <div class="p-6 rounded-2xl bg-blue-500/5 border border-blue-500/20">
+                                            <div class="flex items-center gap-3 mb-4">
+                                                <i data-lucide="waves" class="text-blue-500 w-6 h-6"></i>
+                                                <h6 class="font-bold text-blue-500">زيادة المياه</h6>
+                                            </div>
+                                            <p class="text-sm text-foreground/80 leading-relaxed">التربة مشبعة → الأكسجين ما يوصلش للجذور → الجذور بتتعفن وبتموت → النبات بيموت وهو "غريق" — وده بالظبط اللي بيحيرك لأنك شايف إنك بتسقيه!</p>
+                                        </div>
+                                    </div>
+
+                                    <p class="text-lg font-medium text-center bg-primary/5 p-4 rounded-xl border border-primary/10">
+                                        إذن الحل مش "أكتر" ولا "أقل"... الحل هو <span class="text-primary font-bold">الكمية الصح في الوقت الصح.</span>
+                                        <br><span class="text-sm text-muted-foreground mt-2 block">وعلشان توصل للكمية الصح دي، في علم بالكامل اتطور عشانها.</span>
+                                    </p>
+                                </div>
+
+                                <div class="space-y-6 mt-12">
+                                    <h5 class="text-2xl font-bold text-foreground mb-6">ثانياً: مفهوم التبخر-النتح — ET (Evapotranspiration)</h5>
+                                    <p>هنا بتيجي أهم كلمة في علم الري: <span class="font-bold text-primary">ET — Evapotranspiration</span> أو بالعربي "التبخر-النتح".</p>
+                                    <p>الـ ET هو المياه اللي بتتفقد من الأرض الزراعية بطريقتين مع بعض:</p>
+                                    
+                                    <ul class="space-y-4 list-none pr-0 my-6">
+                                        <li class="flex gap-4">
+                                            <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-1"><i data-lucide="cloud-sun" class="w-3 h-3 text-primary"></i></div>
+                                            <p><span class="font-bold text-foreground">Evaporation (التبخر):</span> المياه اللي بتتبخر مباشرة من سطح التربة بتأثير الشمس والحرارة.</p>
+                                        </li>
+                                        <li class="flex gap-4">
+                                            <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-1"><i data-lucide="wind" class="w-3 h-3 text-primary"></i></div>
+                                            <p><span class="font-bold text-foreground">Transpiration (النتح):</span> المياه اللي بتتبخر من خلال مسام أوراق النبات أثناء عملية التمثيل الضوئي — وده الجزء اللي كتير ناس مش بتعرفه!</p>
+                                        </li>
+                                    </ul>
+
+                                    <div class="bg-primary/5 p-6 rounded-2xl border border-primary/20 text-center">
+                                        <p class="font-bold text-lg text-primary">الـ ET إذن = كمية المياه اللي بيحتاجها المحصول فعلاً عشان يكمل حياته في ظروف مناخية معينة.</p>
+                                    </div>
+
+                                    <p>وهنا الدنيا بتتعقد: الـ ET مش رقم ثابت! بيتغير حسب: <span class="text-muted-foreground font-medium">(درجة الحرارة، رطوبة الهواء، سرعة الرياح، الإشعاع الشمسي، نوع المحصول ومرحلة نموه)</span>.</p>
+                                </div>
+
+                                <div class="space-y-6 mt-12">
+                                    <h5 class="text-2xl font-bold text-foreground mb-6">ثالثاً: ET₀ — مرجعية مياه الري العالمية</h5>
+                                    <p>عشان نقيس الـ ET بطريقة موحدة تنفع في أي مكان في العالم، العلماء اخترعوا حاجة اسمها <span class="font-bold text-primary">ET₀ (Reference Evapotranspiration)</span> أو "التبخر-النتح المرجعي".</p>
+                                    <p>الـ ET₀ بيتحسب على أساس محصول مرجعي افتراضي هو <span class="font-bold text-foreground">العشب الأخضر الطبيعي</span> (grass reference surface) بارتفاع ٠.١٢ متر في أحوال صحية مثالية.</p>
+                                    <p><span class="font-bold text-foreground">ليه العشب؟</span> لأنه سطح موحد ومعروف الخصائص في كل مكان في العالم، فبيعمل زي المسطرة اللي بنقيس بيها كل حاجة تانية.</p>
+                                </div>
+
+                                <div class="space-y-6 mt-12">
+                                    <h5 class="text-2xl font-bold text-foreground mb-6">رابعاً: معادلة Penman-Monteith — الذهب الخالص في علم الري</h5>
+                                    <p>الطريقة الوحيدة المعتمدة دولياً من منظمة الأغذية والزراعة (FAO) لحساب الـ ET₀ هي معادلة <span class="font-bold text-primary">Penman-Monteith</span>.</p>
+                                    
+                                    <div class="bg-card/50 p-6 rounded-2xl border border-border my-6 overflow-x-auto" dir="ltr">
+                                        <code class="text-primary font-mono text-sm block whitespace-nowrap">ET₀ = [0.408·Δ·(Rn - G) + γ·(900/(T+273))·u₂·(es - ea)] / [Δ + γ·(1 + 0.34·u₂)]</code>
+                                    </div>
+
+                                    <p class="text-sm text-muted-foreground">المعادلة بتأخذ في الاعتبار: صافي الإشعاع الشمسي، درجة الحرارة، سرعة الرياح، عجز ضغط البخار (جفاف الهواء)، الحرارة المنتقلة لباطن الأرض، وغيرها من العوامل المناخية المعقدة.</p>
+
+                                    <div class="bg-primary/5 p-4 rounded-xl border border-primary/10">
+                                        <p><span class="font-bold text-foreground">الناتج:</span> الـ ET₀ بالـ mm/day — يعني كام ملليمتر مياه المحصول المرجعي (العشب) محتاجه في اليوم.</p>
+                                        <p class="text-sm mt-2 text-muted-foreground"><span class="font-medium text-foreground">مثال:</span> لو الـ ET₀ = 6 mm/day، ده معناه إن العشب المرجعي محتاج 6 لتر لكل متر مربع في اليوم.</p>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-6 mt-12">
+                                    <h5 class="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
+                                        <i data-lucide="sprout" class="text-primary w-6 h-6"></i>
+                                        خامساً: معامل المحصول Kc — الرابط بين العلم والواقع
+                                    </h5>
+                                    <p>العشب مش قمح ومش طماطم ومش نخيل. وعشان نعرف احتياج أي محصول تاني، بنضرب الـ ET₀ في رقم اسمه <span class="font-bold text-primary">Kc (Crop Coefficient)</span> أو "معامل المحصول":</p>
+                                    
+                                    <div class="bg-card/50 p-4 rounded-xl border border-border my-4 text-center" dir="ltr">
+                                        <span class="text-xl font-bold text-primary font-mono">ETc = Kc × ET₀</span>
+                                    </div>
+
+                                    <p>الـ Kc ده معامل بيعبر عن مدى "عطش" المحصول مقارنة بالعشب المرجعي وهو مش رقم ثابت، بيتغير مع مراحل نمو المحصول الأربعة:</p>
+
+                                    <div class="overflow-x-auto mt-6">
+                                        <table class="w-full text-sm text-right border-collapse">
+                                            <thead>
+                                                <tr class="bg-muted/50 border-b border-border">
+                                                    <th class="p-4 font-bold text-foreground">المرحلة</th>
+                                                    <th class="p-4 font-bold text-foreground">الوصف</th>
+                                                    <th class="p-4 font-bold text-foreground text-center">Kc للقمح (مثال)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="divide-y divide-border">
+                                                <tr class="hover:bg-muted/20 transition-colors">
+                                                    <td class="p-4 font-medium text-foreground">Initial (البداية)</td>
+                                                    <td class="p-4 text-muted-foreground">من الزراعة لنمو الغطاء النباتي 10%</td>
+                                                    <td class="p-4 text-center font-bold text-primary">0.35</td>
+                                                </tr>
+                                                <tr class="hover:bg-muted/20 transition-colors">
+                                                    <td class="p-4 font-medium text-foreground">Crop Development (النمو)</td>
+                                                    <td class="p-4 text-muted-foreground">الغطاء بيزيد لحد التغطية الكاملة</td>
+                                                    <td class="p-4 text-center text-primary">يرتفع تدريجياً</td>
+                                                </tr>
+                                                <tr class="hover:bg-muted/20 transition-colors">
+                                                    <td class="p-4 font-medium text-foreground">Mid-season (منتصف الموسم)</td>
+                                                    <td class="p-4 text-muted-foreground">أعلى استهلاك — المحصول في أوجه</td>
+                                                    <td class="p-4 text-center font-bold text-primary">1.15</td>
+                                                </tr>
+                                                <tr class="hover:bg-muted/20 transition-colors">
+                                                    <td class="p-4 font-medium text-foreground">Late season (نهاية الموسم)</td>
+                                                    <td class="p-4 text-muted-foreground">بدء النضج والجفاف</td>
+                                                    <td class="p-4 text-center font-bold text-primary">0.25</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-6 mt-12 bg-primary/5 p-8 rounded-3xl border border-primary/20">
+                                    <h5 class="text-2xl font-bold text-foreground mb-6">سادساً: مثال عملي حقيقي — قمح في مصر (شتاء)</h5>
+                                    <p>خلينا نحسب مع بعض احتياج محصول القمح في منطقة الدلتا في مصر في يناير (المرحلة: منتصف الموسم Mid-season → Kc = 1.15).</p>
+                                    
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
+                                        <div class="bg-card p-4 rounded-xl border border-border">
+                                            <p class="text-sm text-muted-foreground mb-2">من البيانات المناخية لمحطة القاهرة:</p>
+                                            <p class="font-bold text-foreground text-lg" dir="ltr">ET₀ ≈ 2.3 mm/day</p>
+                                        </div>
+                                        <div class="bg-primary/10 p-4 rounded-xl border border-primary/30">
+                                            <p class="text-sm text-primary mb-2">إذن الاستهلاك الفعلي:</p>
+                                            <p class="font-bold text-primary text-lg" dir="ltr">ETc = 1.15 × 2.3 = 2.64 mm/day</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-6 p-4 bg-card rounded-xl border border-border">
+                                        <p class="font-bold text-foreground mb-2">يعني إيه الكلام ده عملياً؟</p>
+                                        <ul class="list-disc list-inside text-sm text-muted-foreground space-y-2">
+                                            <li>كل فدان (4200 م²) محتاج: 2.64 × 4200 = <span class="font-bold text-primary">11,088 لتر في اليوم</span></li>
+                                            <li>أو <span class="font-bold text-primary">11 متر مكعب في اليوم للفدان</span></li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <p class="text-sm text-orange-500 font-medium mt-4">لو الناس بتسقي القمح بالغمر التقليدي، ممكن تدي الأرض 50-80 مم في كل رية — يعني بتسقي بأكتر من اللازم بكتير وبتهدر مياه.</p>
+                                </div>
+
+                                <div class="space-y-6 mt-12">
+                                    <h5 class="text-2xl font-bold text-foreground mb-6">ثامناً: الجدول اللي يفيدك على طول — Kc لأهم المحاصيل في مصر</h5>
+                                    <div class="overflow-x-auto">
+                                        <table class="w-full text-sm text-right border-collapse">
+                                            <thead>
+                                                <tr class="bg-muted/50 border-b border-border">
+                                                    <th class="p-4 font-bold text-foreground">المرحلة</th>
+                                                    <th class="p-4 font-bold text-foreground text-center">القمح</th>
+                                                    <th class="p-4 font-bold text-foreground text-center">الذرة</th>
+                                                    <th class="p-4 font-bold text-foreground text-center">الطماطم</th>
+                                                    <th class="p-4 font-bold text-foreground text-center">البطاطس</th>
+                                                    <th class="p-4 font-bold text-foreground text-center">البرتقال</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="divide-y divide-border">
+                                                <tr class="hover:bg-muted/20 transition-colors">
+                                                    <td class="p-4 font-medium text-foreground">Initial</td>
+                                                    <td class="p-4 text-center">0.35</td>
+                                                    <td class="p-4 text-center">0.30</td>
+                                                    <td class="p-4 text-center">0.60</td>
+                                                    <td class="p-4 text-center">0.50</td>
+                                                    <td class="p-4 text-center">0.65</td>
+                                                </tr>
+                                                <tr class="hover:bg-muted/20 transition-colors">
+                                                    <td class="p-4 font-medium text-foreground">Mid-season</td>
+                                                    <td class="p-4 text-center font-bold text-primary">1.15</td>
+                                                    <td class="p-4 text-center font-bold text-primary">1.20</td>
+                                                    <td class="p-4 text-center font-bold text-primary">1.15</td>
+                                                    <td class="p-4 text-center font-bold text-primary">1.15</td>
+                                                    <td class="p-4 text-center font-bold text-primary">0.70</td>
+                                                </tr>
+                                                <tr class="hover:bg-muted/20 transition-colors">
+                                                    <td class="p-4 font-medium text-foreground">Late season</td>
+                                                    <td class="p-4 text-center">0.25</td>
+                                                    <td class="p-4 text-center">0.35</td>
+                                                    <td class="p-4 text-center">0.70</td>
+                                                    <td class="p-4 text-center">0.75</td>
+                                                    <td class="p-4 text-center">0.70</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <p class="text-xs text-muted-foreground text-center mt-2">(المصدر: FAO Irrigation and Drainage Paper No. 56)</p>
+                                </div>
+
+                                <div class="space-y-6 mt-12">
+                                    <h5 class="text-2xl font-bold text-foreground mb-6 flex items-center gap-3 text-red-500">
+                                        <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+                                        أهم الأخطاء الشائعة اللي بتكلف الفلوس
+                                    </h5>
+                                    
+                                    <ul class="space-y-4 list-none pr-0">
+                                        <li class="flex gap-4 items-start bg-red-500/5 p-4 rounded-xl border border-red-500/10">
+                                            <div class="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center shrink-0 mt-0.5"><i data-lucide="x" class="w-3 h-3 text-red-500"></i></div>
+                                            <div>
+                                                <span class="font-bold text-foreground">الري بالخبرة مش بالحساب:</span> <span class="text-muted-foreground">"أنا بعرف من لون التربة!" — لأ، إنت بس بتخمن.</span>
+                                            </div>
+                                        </li>
+                                        <li class="flex gap-4 items-start bg-red-500/5 p-4 rounded-xl border border-red-500/10">
+                                            <div class="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center shrink-0 mt-0.5"><i data-lucide="x" class="w-3 h-3 text-red-500"></i></div>
+                                            <div>
+                                                <span class="font-bold text-foreground">تجاهل مرحلة نمو المحصول:</span> <span class="text-muted-foreground">كتير ناس بتسقي بكمية واحدة طول الموسم مع إن الـ Kc بيتغير جذرياً.</span>
+                                            </div>
+                                        </li>
+                                        <li class="flex gap-4 items-start bg-red-500/5 p-4 rounded-xl border border-red-500/10">
+                                            <div class="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center shrink-0 mt-0.5"><i data-lucide="x" class="w-3 h-3 text-red-500"></i></div>
+                                            <div>
+                                                <span class="font-bold text-foreground">تجاهل كفاءة نظام الري:</span> <span class="text-muted-foreground">لو بتحسب ETc ومش بتقسم على الكفاءة (غمر 50-60%، تنقيط 85-95%)، انت كمان بتحسب ناقص.</span>
+                                            </div>
+                                        </li>
+                                        <li class="flex gap-4 items-start bg-red-500/5 p-4 rounded-xl border border-red-500/10">
+                                            <div class="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center shrink-0 mt-0.5"><i data-lucide="x" class="w-3 h-3 text-red-500"></i></div>
+                                            <div>
+                                                <span class="font-bold text-foreground">استخدام بيانات مناخية من مناطق تانية:</span> <span class="text-muted-foreground">مصر فيها أكتر من منطقة مناخية، بيانات القاهرة مش زي أسوان مش زي الدلتا.</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-card p-8 rounded-3xl border border-border mt-12 shadow-sm">
+                                    <h5 class="text-2xl font-bold text-primary mb-4">الخلاصة — مهندس الري الحقيقي بيحسب</h5>
+                                    <p class="mb-4">الري مش "هوية وخبرة" — الري علم وأرقام ومعادلات.</p>
+                                    <p class="mb-4">لما تعرف تحسب ETc صح، بتعرف إمتى بالظبط تسقي، كام ليتر بالظبط لكل فدان، إزاي توفر المياه من غير ما تأثر على المحصول، وإزاي تقنع صاحب المشروع بقرارتك بأرقام مش بكلام.</p>
+                                    <p class="font-bold text-foreground">وده هو الفرق بين مهندس ري بيصمم شبكة ويضمن نتيجتها... ومهندس بيخمن ويتمنى.</p>
+                                    
+                                    <div class="mt-6 p-4 bg-primary/10 rounded-xl border border-primary/20">
+                                        <p class="text-sm font-medium text-primary">في المقالات الجاية هنطبق ده عملياً على تصميم شبكة تنقيط كاملة، خطوة خطوة، بأرقام حقيقية من التربة لحد الطلمبة.</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-col items-end mt-16 pt-8 border-t border-border">
+                                    <p class="text-xl font-bold text-foreground">أحمد محمد مبارك</p>
+                                    <p class="text-primary font-medium tracking-wide">مهندس ري</p>
+                                </div>
+
+                                <!-- References -->
+                                <div class="mt-16 p-8 bg-muted rounded-2xl border border-border">
+                                    <h6 class="text-sm font-bold text-muted-foreground uppercase tracking-[0.2em] mb-4">المراجع العلمية للمقال:</h6>
+                                    <ul class="space-y-3 text-sm text-foreground/60 font-light pr-0 list-none" dir="ltr">
+                                        <li class="flex gap-2 text-left"><span>•</span> Allen, R.G., Pereira, L.S., Raes, D., & Smith, M. (1998). Crop Evapotranspiration: Guidelines for Computing Crop Water Requirements. FAO Irrigation and Drainage Paper No. 56.</li>
+                                        <li class="flex gap-2 text-left"><span>•</span> Doorenbos, J., & Pruitt, W.O. (1977). Guidelines for Predicting Crop Water Requirements. FAO Irrigation and Drainage Paper No. 24.</li>
+                                        <li class="flex gap-2 text-left"><span>•</span> Brouwer, C., & Heibloem, M. (1986). Irrigation Water Management: Irrigation Water Needs. FAO Training Manual No. 3.</li>
+                                        <li class="flex gap-2" dir="rtl"><span>•</span> الجميزي، أحمد (2021). أساسيات هندسة الري والصرف. دار الكتب الزراعية، القاهرة.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
                     <!-- Article Grid (Future Articles) -->
                     <div class="pb-20">
                         <!-- More articles coming soon -->
@@ -334,6 +627,6 @@
     </a>
 
     <!-- Script -->
-    <script src="script.js?v=2.1"></script>
+    <script src="script.js?v=3.0"></script>
 </body>
 </html>

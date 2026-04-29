@@ -15,10 +15,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@0.372.0"></script>
     
     <!-- Custom Style -->
-    <link rel="stylesheet" href="style.css?v=2.1">
+    <link rel="stylesheet" href="style.css?v=3.0">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -70,10 +70,12 @@
         <p class="text-[10px] uppercase tracking-[0.3em] text-primary font-bold mt-4">جاري التحميل...</p>
     </div>
 
+    <!-- Noise Texture -->
+    <div class="noise" aria-hidden="true"></div>
 
     <!-- Custom Cursor -->
-    <div id="cursor-dot" class="cursor-dot hidden md:block"></div>
-    <div id="cursor-follower" class="cursor-follower hidden md:block"></div>
+    <div id="cursor-dot" class="cursor-dot hidden" aria-hidden="true"></div>
+    <div id="cursor-follower" class="cursor-follower hidden" aria-hidden="true"></div>
 
     <!-- Background Blobs -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10 bg-background">
@@ -99,12 +101,12 @@
             <!-- Desktop Links -->
             <div class="hidden lg:flex items-center gap-10">
                 <div class="flex items-center gap-8">
-                    <a href="index.html" class="text-foreground/70 hover:text-primary transition-all font-body text-sm font-medium tracking-wide">الرئيسية</a>
-                    <a href="about.html" class="text-primary transition-all font-body text-sm font-bold tracking-wide">من أنا</a>
-                    <a href="services.html" class="text-foreground/70 hover:text-primary transition-all font-body text-sm font-medium tracking-wide">الخدمات</a>
-                    <a href="portfolio.html" class="text-foreground/70 hover:text-primary transition-all font-body text-sm font-medium tracking-wide">أعمالي</a>
-                    <a href="articles.html" class="text-foreground/70 hover:text-primary transition-all font-body text-sm font-medium tracking-wide">مقالات علمية</a>
-                    <a href="contact.html" class="text-foreground/70 hover:text-primary transition-all font-body text-sm font-medium tracking-wide">تواصل معي</a>
+                    <a href="index.html" class="nav-link-item">الرئيسية</a>
+                    <a href="about.html" class="nav-link-item active">من أنا</a>
+                    <a href="services.html" class="nav-link-item">الخدمات</a>
+                    <a href="portfolio.html" class="nav-link-item">أعمالي</a>
+                    <a href="articles.html" class="nav-link-item">مقالات علمية</a>
+                    <a href="contact.html" class="nav-link-item">تواصل معي</a>
                 </div>
                 
                 <div class="flex items-center gap-4 border-r border-foreground/10 pr-6 mr-2">
@@ -219,54 +221,89 @@
         <!-- Technical Skills -->
         <section class="section-padding bg-muted/30">
             <div class="container mx-auto">
-                <div class="max-w-3xl mx-auto text-right">
-                    <h3 class="text-3xl md:text-4xl font-heading font-serif text-foreground mb-12 reveal-y">المهارات <span class="text-primary">التقنية والهندسية</span></h3>
-                    
+                <div class="text-center mb-16 reveal-y">
+                    <span class="text-primary font-medium tracking-[0.3em] uppercase text-xs mb-4 block">الكفاءة المهنية</span>
+                    <h3 class="text-3xl md:text-5xl font-heading font-serif text-foreground mb-4">المهارات <span class="text-primary">التقنية والهندسية</span></h3>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="max-w-3xl mx-auto">
                     <div class="space-y-8">
-                        <div class="skill-item reveal-y" style="transition-delay: 0.1s">
-                            <div class="flex justify-between mb-2">
+                        <div class="skill-item reveal-y glass p-6 rounded-2xl border border-border" style="transition-delay:0.1s">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-sm font-bold text-primary">95%</span>
                                 <span class="text-foreground font-medium">تصميم شبكات الري (Reticulation Design)</span>
-                                <span class="text-primary font-bold stat-number">95%</span>
                             </div>
-                            <div class="w-full h-2 bg-primary/10 rounded-full overflow-hidden">
-                                <div class="skill-bar-fill h-full bg-primary rounded-full" data-width="95%"></div>
+                            <div class="w-full h-2.5 bg-muted rounded-full overflow-hidden">
+                                <div class="skill-bar-fill rounded-full" data-width="95%"></div>
                             </div>
                         </div>
-                        
-                        <div class="skill-item reveal-y" style="transition-delay: 0.2s">
-                            <div class="flex justify-between mb-2">
+                        <div class="skill-item reveal-y glass p-6 rounded-2xl border border-border" style="transition-delay:0.2s">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-sm font-bold text-primary">90%</span>
                                 <span class="text-foreground font-medium">التحليل الهيدروليكي (Hydraulic Analysis)</span>
-                                <span class="text-primary font-bold stat-number">90%</span>
                             </div>
-                            <div class="w-full h-2 bg-primary/10 rounded-full overflow-hidden">
-                                <div class="skill-bar-fill h-full bg-primary rounded-full" data-width="90%"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-item reveal-y" style="transition-delay: 0.3s">
-                            <div class="flex justify-between mb-2">
-                                <span class="text-foreground font-medium">إدارة الموارد المائية (Water Resource Management)</span>
-                                <span class="text-primary font-bold stat-number">88%</span>
-                            </div>
-                            <div class="w-full h-2 bg-primary/10 rounded-full overflow-hidden">
-                                <div class="skill-bar-fill h-full bg-primary rounded-full" data-width="88%"></div>
+                            <div class="w-full h-2.5 bg-muted rounded-full overflow-hidden">
+                                <div class="skill-bar-fill rounded-full" data-width="90%"></div>
                             </div>
                         </div>
-
-                        <div class="skill-item reveal-y" style="transition-delay: 0.4s">
-                            <div class="flex justify-between mb-2">
+                        <div class="skill-item reveal-y glass p-6 rounded-2xl border border-border" style="transition-delay:0.3s">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-sm font-bold text-primary">92%</span>
                                 <span class="text-foreground font-medium">علوم الأراضي واستصلاح التربة</span>
-                                <span class="text-primary font-bold stat-number">92%</span>
                             </div>
-                            <div class="w-full h-2 bg-primary/10 rounded-full overflow-hidden">
-                                <div class="skill-bar-fill h-full bg-primary rounded-full" data-width="92%"></div>
+                            <div class="w-full h-2.5 bg-muted rounded-full overflow-hidden">
+                                <div class="skill-bar-fill rounded-full" data-width="92%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item reveal-y glass p-6 rounded-2xl border border-border" style="transition-delay:0.4s">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-sm font-bold text-primary">88%</span>
+                                <span class="text-foreground font-medium">إدارة الموارد المائية (Water Resource Mgmt)</span>
+                            </div>
+                            <div class="w-full h-2.5 bg-muted rounded-full overflow-hidden">
+                                <div class="skill-bar-fill rounded-full" data-width="88%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item reveal-y glass p-6 rounded-2xl border border-border" style="transition-delay:0.5s">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-sm font-bold text-primary">85%</span>
+                                <span class="text-foreground font-medium">حسابات الاحتياج المائي للمحاصيل (ET/Kc)</span>
+                            </div>
+                            <div class="w-full h-2.5 bg-muted rounded-full overflow-hidden">
+                                <div class="skill-bar-fill rounded-full" data-width="85%"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="mt-20 text-center reveal-y">
-                        <a href="public/cv.png" download class="inline-flex items-center gap-4 px-12 py-5 bg-primary text-white rounded-2xl font-bold text-lg hover:bg-primary-dark transition-all shadow-2xl shadow-primary/20">
+
+                    <!-- Why Choose Me -->
+                    <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="tilt-card glass p-8 rounded-3xl border border-border text-center reveal-y" style="transition-delay:0.1s">
+                            <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mx-auto mb-5">
+                                <i data-lucide="microscope" class="w-7 h-7"></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-3">خلفية بحثية</h4>
+                            <p class="text-sm text-muted-foreground font-light">تصاميمي مبنية على بيانات التربة والمناخ الفعلية، وليس على التخمين.</p>
+                        </div>
+                        <div class="tilt-card glass p-8 rounded-3xl border border-border text-center reveal-y" style="transition-delay:0.2s">
+                            <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mx-auto mb-5">
+                                <i data-lucide="shield-check" class="w-7 h-7"></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-3">معايير FAO</h4>
+                            <p class="text-sm text-muted-foreground font-light">أعمل وفق المعايير الدولية لمنظمة الأغذية والزراعة في كل مشروع.</p>
+                        </div>
+                        <div class="tilt-card glass p-8 rounded-3xl border border-border text-center reveal-y" style="transition-delay:0.3s">
+                            <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mx-auto mb-5">
+                                <i data-lucide="trending-up" class="w-7 h-7"></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-3">نتائج قابلة للقياس</h4>
+                            <p class="text-sm text-muted-foreground font-light">أحرص على تسليم تقرير كفاءة ري لكل مشروع يوضح التوفير الفعلي.</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 text-center reveal-y">
+                        <a href="public/cv.png" download class="btn-primary magnetic inline-flex items-center gap-4 px-12 py-5 text-lg">
                             <i data-lucide="download" class="w-6 h-6"></i>
-                            <span>تحميل الملف التعريفي الكامل (PDF)</span>
+                            <span>تحميل الملف التعريفي الكامل</span>
                         </a>
                     </div>
                 </div>
@@ -387,6 +424,6 @@
     </a>
 
     <!-- Script -->
-    <script src="script.js?v=2.1"></script>
+    <script src="script.js?v=3.0"></script>
 </body>
 </html>
