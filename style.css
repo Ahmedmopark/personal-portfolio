@@ -542,6 +542,42 @@ body.cursor-hover .cursor-dot { transform: translate(-50%, -50%) scale(1.5); }
 }
 
 /* ============================================
+   DARK MODE — CONTACT FORM INPUTS (CRITICAL FIX)
+   Tailwind uses bg-muted/30 which in dark mode can
+   render text as nearly invisible. Force override.
+   ============================================ */
+.dark input[type="text"],
+.dark input[type="email"],
+.dark input[type="number"],
+.dark textarea,
+.dark select {
+  color: var(--foreground) !important;
+  background-color: var(--muted) !important;
+  -webkit-text-fill-color: var(--foreground) !important;
+  caret-color: var(--primary);
+}
+.dark input[type="text"]::placeholder,
+.dark input[type="email"]::placeholder,
+.dark input[type="number"]::placeholder,
+.dark textarea::placeholder {
+  color: var(--muted-foreground) !important;
+  opacity: 0.75;
+}
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus,
+.dark input:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--foreground) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--muted) inset !important;
+  box-shadow: 0 0 0 1000px var(--muted) inset !important;
+  caret-color: var(--primary);
+}
+.dark option {
+  background: var(--card);
+  color: var(--foreground);
+}
+
+/* ============================================
    DARK MODE OVERRIDES
    ============================================ */
 .dark .text-primary { color: var(--primary) !important; }
@@ -574,6 +610,71 @@ body.cursor-hover .cursor-dot { transform: translate(-50%, -50%) scale(1.5); }
 [dir="rtl"] .whatsapp-float { left: 2rem; right: auto; }
 
 @media (max-width: 768px) { .whatsapp-float { width: 50px; height: 50px; bottom: 1.5rem; left: 1.5rem; } }
+
+/* ============================================
+   CHANNEL SOCIAL ICONS (Footer / Contact)
+   ============================================ */
+.social-channel-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  color: var(--muted-foreground);
+  background: transparent;
+  text-decoration: none;
+  transition: all 0.35s var(--spring);
+  flex-shrink: 0;
+}
+.social-channel-btn.whatsapp-channel:hover {
+  border-color: #25d366;
+  color: #25d366;
+  background: rgba(37,211,102,0.08);
+  transform: translateY(-2px);
+}
+.social-channel-btn.telegram-channel:hover {
+  border-color: #2AABEE;
+  color: #2AABEE;
+  background: rgba(42,171,238,0.08);
+  transform: translateY(-2px);
+}
+.social-channel-btn svg { width: 20px; height: 20px; }
+
+/* Channel Banner (Contact page info block) */
+.channel-banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.channel-banner:hover {
+  border-color: var(--primary);
+  background: var(--muted);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.channel-banner .ch-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #fff;
+}
+.channel-banner.whatsapp-ch .ch-icon { background: linear-gradient(135deg, #25d366, #128c7e); }
+.channel-banner.telegram-ch .ch-icon { background: linear-gradient(135deg, #2AABEE, #1a7cbf); }
+.channel-banner .ch-text { text-align: right; flex: 1; }
+.channel-banner .ch-title { font-weight: 700; font-size: 0.9rem; color: var(--foreground); display: block; }
+.channel-banner .ch-sub { font-size: 0.75rem; color: var(--muted-foreground); margin-top: 2px; display: block; }
 
 /* ============================================
    SCROLL PROGRESS
