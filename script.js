@@ -1,5 +1,6 @@
 /* ============================================================
-   AHMED MUBARAK PORTFOLIO — script.js v3.0
+   AHMED MUBARAK PORTFOLIO — script.js v4.0
+   Optimized, secure, interactive
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -42,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('theme', dark ? 'dark' : 'light');
   };
 
-  // Init theme
   const savedTheme = localStorage.getItem('theme');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   applyTheme(savedTheme === 'dark' || (!savedTheme && prefersDark));
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ══════════════════════════════════════════════════ */
   const cursorDot = document.getElementById('cursor-dot');
   const cursorFollower = document.getElementById('cursor-follower');
-  let mouseX = 0, mouseY = 0, fX = 0, fY = 0, cursorRAF;
+  let mouseX = 0, mouseY = 0, fX = 0, fY = 0;
 
   if (cursorDot && cursorFollower && window.matchMedia('(pointer: fine)').matches) {
     cursorDot.classList.remove('hidden');
@@ -114,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
       mouseY = e.clientY;
       cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%,-50%)`;
 
-      // Profile glow
       const profileEl = document.querySelector('.profile-zone');
       if (profileEl) {
         const r = profileEl.getBoundingClientRect();
@@ -127,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
       fX += (mouseX - fX) * 0.12;
       fY += (mouseY - fY) * 0.12;
       cursorFollower.style.transform = `translate3d(${fX}px, ${fY}px, 0) translate(-50%,-50%)`;
-      cursorRAF = requestAnimationFrame(animateFollower);
+      requestAnimationFrame(animateFollower);
     };
 
     window.addEventListener('mousemove', moveCursor, { passive: true });
@@ -184,7 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileToggle.addEventListener('click', () => toggleMenu());
     mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(true)));
 
-    // Active link highlight
     const path = window.location.pathname.split('/').pop() || 'index.html';
     mobileMenu.querySelectorAll('a').forEach(a => {
       if (a.getAttribute('href') === path) a.classList.add('active');
@@ -202,6 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ══════════════════════════════════════════════════ */
   const navbar = document.getElementById('navbar');
   const scrollBar = document.getElementById('scroll-progress');
+  const quickNav = document.querySelector('.quick-nav');
   let ticking = false;
 
   window.addEventListener('scroll', () => {
@@ -213,6 +212,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (navbar) navbar.classList.toggle('nav-scrolled', sy > 20);
       if (scrollBar) scrollBar.style.width = `${(sy / totalH) * 100}%`;
+
+      // Quick nav visibility
+      if (quickNav) quickNav.classList.toggle('visible', sy > 400);
 
       // Subtle parallax on blobs
       document.querySelectorAll('.blob').forEach((b, i) => {
@@ -228,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
      9. REVEAL ANIMATIONS (Intersection Observer)
   ══════════════════════════════════════════════════ */
   const revealObs = new IntersectionObserver((entries) => {
-    entries.forEach((entry, idx) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const el = entry.target;
         const delay = parseFloat(el.style.transitionDelay || el.dataset.delay || 0);
@@ -371,15 +373,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ══════════════════════════════════════════════════
-     16. CONTACT FORM
+     16. CONTACT FORM (with security honeypot)
   ══════════════════════════════════════════════════ */
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
     let submissionTimeout;
+    let lastSubmit = 0;
+
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = document.getElementById('submit-btn');
       if (!btn) return;
+
+      // Rate limit: 10 second cooldown
+      if (Date.now() - lastSubmit < 10000) return;
+      lastSubmit = Date.now();
+
       const span = btn.querySelector('span');
       const origHTML = btn.innerHTML;
 
@@ -389,10 +398,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if (span) span.textContent = 'جاري الإرسال...';
 
       try {
+        const formData = new FormData(contactForm);
+        // Sanitize inputs client-side
+        for (const [key, val] of formData.entries()) {
+          if (typeof val === 'string') {
+            formData.set(key, val.replace(/<[^>]*>/g, '').trim());
+          }
+        }
+
         const res = await fetch('/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(new FormData(contactForm)).toString(),
+          body: new URLSearchParams(formData).toString(),
         });
         if (res.ok) {
           btn.classList.add('!bg-green-500');
@@ -435,24 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ══════════════════════════════════════════════════
-     19. SECTION ACTIVE HIGHLIGHT (Scrollspy)
-  ══════════════════════════════════════════════════ */
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-link-item');
-
-  if (sections.length && navLinks.length) {
-    const spyObs = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${entry.target.id}`));
-        }
-      });
-    }, { threshold: 0.35 });
-    sections.forEach(s => spyObs.observe(s));
-  }
-
-  /* ══════════════════════════════════════════════════
-     20. TOOL CARDS HOVER GLOW
+     19. TOOL CARDS HOVER GLOW
   ══════════════════════════════════════════════════ */
   document.querySelectorAll('.tool-card').forEach(card => {
     card.addEventListener('mousemove', (e) => {
@@ -463,7 +463,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ══════════════════════════════════════════════════
-     21. KEYBOARD NAVIGATION SHORTCUT
+     20. KEYBOARD NAVIGATION
   ══════════════════════════════════════════════════ */
   document.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
@@ -476,6 +476,19 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('mobile-menu-toggle')?.click();
       }
     }
+  });
+
+  /* ══════════════════════════════════════════════════
+     21. SECURITY: Disable form autocomplete on sensitive fields
+  ══════════════════════════════════════════════════ */
+  document.querySelectorAll('input[name="bot-field"]').forEach(el => {
+    el.setAttribute('tabindex', '-1');
+    el.setAttribute('autocomplete', 'off');
+  });
+
+  // Block right-click on images (optional light protection)
+  document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('contextmenu', (e) => e.preventDefault());
   });
 
 }); // end DOMContentLoaded
@@ -494,7 +507,7 @@ function calculateSavings() {
   const area = parseFloat(areaEl?.value);
   const cropNeed = parseInt(cropEl?.value, 10);
 
-  if (!area || area <= 0) {
+  if (!area || area <= 0 || area > 100000) {
     areaEl?.focus();
     areaEl?.classList.add('!border-red-500');
     setTimeout(() => areaEl?.classList.remove('!border-red-500'), 2000);
@@ -503,7 +516,7 @@ function calculateSavings() {
 
   const saved = Math.round(area * cropNeed * 0.4);
   const percent = 40;
-  const costSaved = Math.round(saved * 0.85); // EGP per m³ approx
+  const costSaved = Math.round(saved * 0.85);
 
   resultDiv?.classList.remove('hidden');
 

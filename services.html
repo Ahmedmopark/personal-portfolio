@@ -18,7 +18,7 @@
     <script src="https://unpkg.com/lucide@0.372.0"></script>
     
     <!-- Custom Style -->
-    <link rel="stylesheet" href="style.css?v=3.0">
+    <link rel="stylesheet" href="style.css?v=4.0">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -30,7 +30,7 @@
     <meta property="og:url" content="https://ahmed-moparak.netlify.app/services.html">
     <meta property="og:title" content="الخدمات | أحمد مبارك">
     <meta property="og:description" content="خدمات هندسة الري المتقدمة، تحليل التربة، والإشراف الفني. حلول هندسية ذكية لترشيد المياه وزيادة الإنتاجية.">
-    <meta property="og:image" content="https://ahmed-moparak.netlify.app/public/og-image.png">
+    <meta property="og:image" content="https://ahmed-moparak.netlify.app/public/og-image.jpg">
     
     <script>
         tailwind.config = {
@@ -169,12 +169,11 @@
                 </div>
 
                 <div class="grid lg:grid-cols-3 gap-8 mb-20">
-                    <!-- Service 1 -->
-                    <div class="group relative h-full reveal-y" style="transition-delay: 0.1s">
-                        <div class="relative h-full glass p-10 rounded-3xl border border-border bg-card/30 hover:border-primary/30 transition-all duration-700 overflow-hidden flex flex-col justify-between shadow-lg">
+                    <div class="group relative h-full reveal-y stagger-1">
+                        <div class="relative h-full glass p-10 rounded-3xl border border-border bg-card/30 hover:border-primary/30 transition-all duration-700 overflow-hidden flex flex-col justify-between shadow-lg card-shine">
                             <div>
                                 <div class="flex justify-between items-start mb-12">
-                                    <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-500">
+                                    <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-500 water-pulse">
                                         <i data-lucide="layers" class="w-8 h-8"></i>
                                     </div>
                                     <span class="text-5xl font-heading text-foreground/5 font-serif">01</span>
@@ -191,12 +190,11 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Service 2 -->
-                    <div class="group relative h-full reveal-y" style="transition-delay: 0.2s">
-                        <div class="relative h-full glass p-10 rounded-3xl border border-border bg-card/30 hover:border-primary/30 transition-all duration-700 overflow-hidden flex flex-col justify-between shadow-lg">
+                    <div class="group relative h-full reveal-y stagger-2">
+                        <div class="relative h-full glass p-10 rounded-3xl border border-border bg-card/30 hover:border-primary/30 transition-all duration-700 overflow-hidden flex flex-col justify-between shadow-lg card-shine">
                             <div>
                                 <div class="flex justify-between items-start mb-12">
-                                    <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-500">
+                                    <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-500 water-pulse">
                                         <i data-lucide="activity" class="w-8 h-8"></i>
                                     </div>
                                     <span class="text-5xl font-heading text-foreground/5 font-serif">02</span>
@@ -213,12 +211,11 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Service 3 -->
-                    <div class="group relative h-full reveal-y" style="transition-delay: 0.3s">
-                        <div class="relative h-full glass p-10 rounded-3xl border border-border bg-card/30 hover:border-primary/30 transition-all duration-700 overflow-hidden flex flex-col justify-between shadow-lg">
+                    <div class="group relative h-full reveal-y stagger-3">
+                        <div class="relative h-full glass p-10 rounded-3xl border border-border bg-card/30 hover:border-primary/30 transition-all duration-700 overflow-hidden flex flex-col justify-between shadow-lg card-shine">
                             <div>
                                 <div class="flex justify-between items-start mb-12">
-                                    <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-500">
+                                    <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-500 water-pulse">
                                         <i data-lucide="shield-check" class="w-8 h-8"></i>
                                     </div>
                                     <span class="text-5xl font-heading text-foreground/5 font-serif">03</span>
@@ -259,8 +256,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="lg:w-1/2 w-full">
-                                <div class="glass p-8 md:p-10 rounded-3xl border border-primary/20 bg-background shadow-2xl">
+                            <div class="lg:w-1/2 w-full reveal-y">
+                                <div class="glass p-8 md:p-10 rounded-3xl border border-primary/20 bg-background shadow-2xl glow-stat card-shine">
                                     <div class="space-y-8">
                                         <div>
                                             <label class="block text-sm font-bold mb-4 opacity-70">المساحة الإجمالية (بالفدان)</label>
@@ -416,12 +413,20 @@
         </div>
     </footer>
 
+    <!-- Quick Nav Dock -->
+    <nav class="quick-nav" aria-label="تنقل سريع">
+        <a href="index.html" title="الرئيسية"><i data-lucide="home" class="w-4 h-4"></i></a>
+        <a href="about.html" title="من أنا"><i data-lucide="user" class="w-4 h-4"></i></a>
+        <a href="portfolio.html" title="أعمالي"><i data-lucide="briefcase" class="w-4 h-4"></i></a>
+        <a href="contact.html" title="تواصل"><i data-lucide="mail" class="w-4 h-4"></i></a>
+    </nav>
+
     <!-- WhatsApp Floating Button -->
     <a href="https://wa.me/201062756257" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
         <i data-lucide="message-circle" class="w-8 h-8"></i>
     </a>
 
     <!-- Script -->
-    <script src="script.js?v=3.0"></script>
+    <script src="script.js?v=4.0"></script>
 </body>
 </html>

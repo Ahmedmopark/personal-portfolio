@@ -18,7 +18,7 @@
     <script src="https://unpkg.com/lucide@0.372.0"></script>
     
     <!-- Custom Style -->
-    <link rel="stylesheet" href="style.css?v=3.0">
+    <link rel="stylesheet" href="style.css?v=4.0">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -30,7 +30,7 @@
     <meta property="og:url" content="https://ahmed-moparak.netlify.app/portfolio.html">
     <meta property="og:title" content="أعمالي | أحمد مبارك">
     <meta property="og:description" content="معرض أعمال المهندس أحمد مبارك - مشاريع ري سكنية، تجارية وزراعية بجودة عالمية ودقة هندسية.">
-    <meta property="og:image" content="https://ahmed-moparak.netlify.app/public/og-image.png">
+    <meta property="og:image" content="https://ahmed-moparak.netlify.app/public/og-image.jpg">
     
     <script>
         tailwind.config = {
@@ -168,12 +168,12 @@
 
                     <div id="comparison-container" class="relative aspect-video max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl cursor-col-resize select-none border border-border reveal-scale">
                         <div class="absolute inset-0">
-                            <img src="public/project1.png" alt="Before" class="w-full h-full object-cover grayscale brightness-75" loading="lazy" decoding="async">
+                            <img src="public/project1.webp" alt="Before" class="w-full h-full object-cover grayscale brightness-75" loading="lazy" decoding="async">
                             <div class="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase">قبل التدخل</div>
                         </div>
 
                         <div id="after-image" class="absolute inset-0 z-10 overflow-hidden" style="clip-path: inset(0 50% 0 0)">
-                            <img src="public/project2.png" alt="After" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                            <img src="public/project2.webp" alt="After" class="w-full h-full object-cover" loading="lazy" decoding="async">
                             <div class="absolute top-4 right-4 bg-primary/80 backdrop-blur-md text-white px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase">بعد التنفيذ</div>
                         </div>
 
@@ -189,34 +189,33 @@
                 </div>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <!-- Project 1 -->
-                    <div class="group reveal-y block transition-all" style="transition-delay: 0.1s">
-                        <div class="relative h-[500px] rounded-2xl overflow-hidden border border-border group-hover:border-primary/30 transition-all duration-700 bg-card shadow-lg">
-                            <img src="public/project1.png" alt="نظام ري فيلا سكنية" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" loading="lazy" decoding="async">
+                    <div class="group reveal-y block transition-all stagger-1">
+                        <div class="relative h-[500px] rounded-2xl overflow-hidden border border-border group-hover:border-primary/30 transition-all duration-700 bg-card shadow-lg card-shine">
+                            <img src="public/project1.webp" alt="نظام ري فيلا سكنية" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" loading="lazy" decoding="async">
                             <div class="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
                             <div class="absolute inset-0 p-10 flex flex-col justify-end">
                                 <div class="mb-6">
                                     <span class="px-3 py-1 bg-primary text-white text-[10px] font-bold uppercase tracking-widest rounded-full mb-4 inline-block">سكني</span>
                                     <h4 class="text-2xl font-body font-medium mb-4 text-foreground group-hover:text-primary transition-colors">نظام ري فيلا سكنية</h4>
                                     <div class="flex items-center gap-3 text-muted-foreground text-sm font-light">
-                                        <i data-lucide="droplets" class="text-primary w-4 h-4"></i>
+                                        <i data-lucide="droplets" class="text-primary w-4 h-4 water-pulse"></i>
                                         <span>القاهرة الجديدة</span>
                                     </div>
                                 </div>
                                 <div class="grid grid-cols-2 gap-4 mb-6 text-[10px] uppercase tracking-widest font-bold text-muted-foreground">
-                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10">
+                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10 glow-stat">
                                         <i data-lucide="maximize" class="w-3 h-3 text-primary"></i>
                                         <span>1,200 م²</span>
                                     </div>
-                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10">
+                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10 glow-stat">
                                         <i data-lucide="droplets" class="w-3 h-3 text-primary"></i>
                                         <span>تنقيط ذكي</span>
                                     </div>
-                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10">
+                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10 glow-stat">
                                         <i data-lucide="trending-down" class="w-3 h-3 text-primary"></i>
                                         <span>توفير 35%</span>
                                     </div>
-                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10">
+                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10 glow-stat">
                                         <i data-lucide="calendar" class="w-3 h-3 text-primary"></i>
                                         <span>15 يوم</span>
                                     </div>
@@ -228,34 +227,33 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Project 2 -->
-                    <div class="group reveal-y block transition-all" style="transition-delay: 0.2s">
-                        <div class="relative h-[500px] rounded-2xl overflow-hidden border border-border group-hover:border-primary/30 transition-all duration-700 bg-card shadow-lg">
-                            <img src="public/project2.png" alt="لاندسكيب مساحات تجارية" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" loading="lazy" decoding="async">
+                    <div class="group reveal-y block transition-all stagger-2">
+                        <div class="relative h-[500px] rounded-2xl overflow-hidden border border-border group-hover:border-primary/30 transition-all duration-700 bg-card shadow-lg card-shine">
+                            <img src="public/project2.webp" alt="لاندسكيب مساحات تجارية" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" loading="lazy" decoding="async">
                             <div class="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
                             <div class="absolute inset-0 p-10 flex flex-col justify-end">
                                 <div class="mb-6">
                                     <span class="px-3 py-1 bg-primary text-white text-[10px] font-bold uppercase tracking-widest rounded-full mb-4 inline-block">تجاري</span>
                                     <h4 class="text-2xl font-body font-medium mb-4 text-foreground group-hover:text-primary transition-colors">نظام ري مساحات تجارية</h4>
                                     <div class="flex items-center gap-3 text-muted-foreground text-sm font-light">
-                                        <i data-lucide="wind" class="text-primary w-4 h-4"></i>
+                                        <i data-lucide="wind" class="text-primary w-4 h-4 water-pulse"></i>
                                         <span>التجمع الخامس</span>
                                     </div>
                                 </div>
                                 <div class="grid grid-cols-2 gap-4 mb-6 text-[10px] uppercase tracking-widest font-bold text-muted-foreground">
-                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10">
+                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10 glow-stat">
                                         <i data-lucide="maximize" class="w-3 h-3 text-primary"></i>
                                         <span>4,500 م²</span>
                                     </div>
-                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10">
+                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10 glow-stat">
                                         <i data-lucide="wind" class="w-3 h-3 text-primary"></i>
                                         <span>رش أوتوماتيك</span>
                                     </div>
-                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10">
+                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10 glow-stat">
                                         <i data-lucide="trending-down" class="w-3 h-3 text-primary"></i>
                                         <span>توفير 25%</span>
                                     </div>
-                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10">
+                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10 glow-stat">
                                         <i data-lucide="calendar" class="w-3 h-3 text-primary"></i>
                                         <span>25 يوم</span>
                                     </div>
@@ -267,34 +265,33 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Project 3 -->
-                    <div class="group reveal-y block transition-all" style="transition-delay: 0.3s">
-                        <div class="relative h-[500px] rounded-2xl overflow-hidden border border-border group-hover:border-primary/30 transition-all duration-700 bg-card shadow-lg">
-                            <img src="public/project3.png" alt="مزرعة إنتاجية مستدامة" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" loading="lazy" decoding="async">
+                    <div class="group reveal-y block transition-all stagger-3">
+                        <div class="relative h-[500px] rounded-2xl overflow-hidden border border-border group-hover:border-primary/30 transition-all duration-700 bg-card shadow-lg card-shine">
+                            <img src="public/project3.webp" alt="مزرعة إنتاجية مستدامة" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" loading="lazy" decoding="async">
                             <div class="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
                             <div class="absolute inset-0 p-10 flex flex-col justify-end">
                                 <div class="mb-6">
                                     <span class="px-3 py-1 bg-primary text-white text-[10px] font-bold uppercase tracking-widest rounded-full mb-4 inline-block">زراعي</span>
                                     <h4 class="text-2xl font-body font-medium mb-4 text-foreground group-hover:text-primary transition-colors">مزرعة إنتاجية مستدامة</h4>
                                     <div class="flex items-center gap-3 text-muted-foreground text-sm font-light">
-                                        <i data-lucide="sprout" class="text-primary w-4 h-4"></i>
+                                        <i data-lucide="sprout" class="text-primary w-4 h-4 water-pulse"></i>
                                         <span>مدينة السادات</span>
                                     </div>
                                 </div>
                                 <div class="grid grid-cols-2 gap-4 mb-6 text-[10px] uppercase tracking-widest font-bold text-muted-foreground">
-                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10">
+                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10 glow-stat">
                                         <i data-lucide="maximize" class="w-3 h-3 text-primary"></i>
                                         <span>15 فدان</span>
                                     </div>
-                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10">
+                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10 glow-stat">
                                         <i data-lucide="sprout" class="w-3 h-3 text-primary"></i>
                                         <span>ري زراعي</span>
                                     </div>
-                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10">
+                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10 glow-stat">
                                         <i data-lucide="trending-down" class="w-3 h-3 text-primary"></i>
                                         <span>توفير 40%</span>
                                     </div>
-                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10">
+                                    <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-lg border border-primary/10 glow-stat">
                                         <i data-lucide="calendar" class="w-3 h-3 text-primary"></i>
                                         <span>45 يوم</span>
                                     </div>
@@ -371,12 +368,20 @@
         </div>
     </footer>
 
+    <!-- Quick Nav Dock -->
+    <nav class="quick-nav" aria-label="تنقل سريع">
+        <a href="index.html" title="الرئيسية"><i data-lucide="home" class="w-4 h-4"></i></a>
+        <a href="about.html" title="من أنا"><i data-lucide="user" class="w-4 h-4"></i></a>
+        <a href="services.html" title="الخدمات"><i data-lucide="cog" class="w-4 h-4"></i></a>
+        <a href="contact.html" title="تواصل"><i data-lucide="mail" class="w-4 h-4"></i></a>
+    </nav>
+
     <!-- WhatsApp Floating Button -->
     <a href="https://wa.me/201062756257" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
         <i data-lucide="message-circle" class="w-8 h-8"></i>
     </a>
 
     <!-- Script -->
-    <script src="script.js?v=3.0"></script>
+    <script src="script.js?v=4.0"></script>
 </body>
 </html>
