@@ -11,45 +11,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Compiled Tailwind CSS -->
+    <link rel="stylesheet" href="public/tailwind.min.css">
     
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@0.372.0"></script>
+    <!-- Custom Style (Minified) -->
+    <link rel="stylesheet" href="public/style.min.css?v=4.1">
     
-    <!-- Custom Style -->
-    <link rel="stylesheet" href="style.css?v=4.0">
+    <!-- Lucide Icons (Self-Hosted) -->
+    <script src="public/lucide.min.js" defer></script>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#2D5A27',
-                        'primary-dark': '#1e3d1a',
-                        'accent-green': '#79a37d',
-                        background: 'var(--background)',
-                        foreground: 'var(--foreground)',
-                        card: 'var(--card)',
-                        border: 'var(--border)',
-                        muted: 'var(--muted)',
-                        'muted-foreground': 'var(--muted-foreground)',
-                    },
-                    fontFamily: {
-                        heading: ['Readex Pro', 'sans-serif'],
-                        body: ['Readex Pro', 'sans-serif'],
-                        serif: ['Readex Pro', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+
 </head>
 <body class="bg-background text-foreground transition-colors duration-300">
     <!-- Preloader -->
@@ -262,7 +238,7 @@
         <a href="portfolio.html" title="أعمالي"><i data-lucide="briefcase" class="w-4 h-4"></i></a>
     </nav>
 
-    <!-- Script -->
-    <script src="script.js?v=4.0"></script>
+    <!-- Script (Minified) -->
+    <script src="public/script.min.js?v=4.1" defer></script>
 </body>
 </html>

@@ -5,20 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>أحمد مبارك | مهندس ري</title>
     <meta name="description" content="متخصص في هندسة الري المتقدمة وحلول المياه المستدامة. ندمج الذكاء الهندسي مع استدامة الموارد.">
+    <link rel="canonical" href="https://ahmed-moparak.netlify.app/">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;600;700&display=swap">
     
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Compiled Tailwind CSS -->
+    <link rel="stylesheet" href="public/tailwind.min.css">
     
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@0.372.0"></script>
+    <!-- Custom Style (Minified) -->
+    <link rel="stylesheet" href="public/style.min.css?v=5.0">
     
-    <!-- Custom Style -->
-    <link rel="stylesheet" href="style.css?v=4.0">
+    <!-- Lucide Icons (Self-Hosted) -->
+    <script src="public/lucide.min.js" defer></script>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -38,35 +39,33 @@
     <meta property="twitter:title" content="أحمد مبارك | مهندس ري">
     <meta property="twitter:description" content="أصمم أنظمة ري موفّرة للمياه للفيلات والمزارع في مصر | طالب بخبرة ميدانية حقيقية مع FAO">
     <meta property="twitter:image" content="https://ahmed-moparak.netlify.app/public/og-image.jpg">
-    
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#2D5A27',
-                        'primary-dark': '#1e3d1a',
-                        'accent-green': '#79a37d',
-                        background: 'var(--background)',
-                        foreground: 'var(--foreground)',
-                        card: 'var(--card)',
-                        border: 'var(--border)',
-                        muted: 'var(--muted)',
-                        'muted-foreground': 'var(--muted-foreground)',
-                    },
-                    fontFamily: {
-                        heading: ['Readex Pro', 'sans-serif'],
-                        body: ['Readex Pro', 'sans-serif'],
-                        serif: ['Readex Pro', 'sans-serif'],
-                    },
-                    animation: {
-                        'bounce-slow': 'bounce 3s infinite',
-                    }
-                }
-            }
-        }
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "أحمد مبارك",
+      "alternateName": "Ahmed Moparak",
+      "jobTitle": "مهندس ري",
+      "description": "متخصص في هندسة الري المتقدمة وحلول المياه المستدامة للفيلات والمزارع في مصر.",
+      "url": "https://ahmed-moparak.netlify.app/",
+      "email": "Ahmedmoparakjop@gmail.com",
+      "image": "https://ahmed-moparak.netlify.app/public/profile.webp",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "المنوفية",
+        "addressCountry": "EG"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/ahmed-moparak-273a94241",
+        "https://wa.me/201062756257",
+        "https://t.me/Eng_Moparak"
+      ],
+      "knowsAbout": ["هندسة الري", "أنظمة الري بالتنقيط", "إدارة المياه", "AutoCAD", "WaterGEMS", "EPANET", "CROPWAT"]
+    }
     </script>
+    
 </head>
 <body class="bg-background text-foreground transition-colors duration-300">
     <!-- Preloader -->
@@ -183,6 +182,7 @@
                 <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_var(--background)_100%)]"></div>
                 <div class="absolute inset-0 bg-gradient-to-b from-background/40 via-background/80 to-background backdrop-blur-md"></div>
                 <div class="absolute inset-0 bg-gradient-to-r from-background/30 via-transparent to-background/30 opacity-50"></div>
+                <canvas id="water-droplets-canvas"></canvas>
             </div>
 
             <!-- Content Container -->
@@ -193,6 +193,9 @@
                         <div class="inline-flex items-center gap-3 py-2 px-5 rounded-full glass text-primary text-sm font-medium mb-8 border border-primary/20 shadow-lg">
                             <i data-lucide="leaf" class="w-4 h-4 text-primary animate-bounce-slow"></i>
                             <span class="tracking-wide">نبتكر للحياة.. ونصمم للاستدامة</span>
+                            <span class="h-4 w-px bg-primary/30"></span>
+                            <span class="status-dot"></span>
+                            <span class="text-xs text-green-600 dark:text-green-400 font-bold">متاح للعمل</span>
                         </div>
 
                         <!-- Name and Title -->
@@ -219,10 +222,30 @@
                                     <span>استكشاف المشاريع</span>
                                 </span>
                             </a>
-                            <a href="public/cv.png" download class="btn-secondary px-10 py-4 text-lg flex items-center gap-3 glass">
+                            <a href="public/cv.webp" download class="btn-secondary px-10 py-4 text-lg flex items-center gap-3 glass">
                                 <i data-lucide="download" class="w-5 h-5"></i>
                                 <span>تحميل السيرة الذاتية</span>
                             </a>
+                        </div>
+
+                        <!-- Hero Mini Stats -->
+                        <div class="flex flex-wrap gap-4 mt-10 justify-start reveal-y" style="transition-delay:0.3s">
+                            <div class="hero-mini-stat">
+                                <strong>+12</strong>
+                                <span>مشروع ميداني</span>
+                            </div>
+                            <div class="hero-mini-stat">
+                                <strong>30%</strong>
+                                <span>توفير مياه</span>
+                            </div>
+                            <div class="hero-mini-stat">
+                                <strong>+350</strong>
+                                <span>فدان مروي</span>
+                            </div>
+                            <div class="hero-mini-stat">
+                                <strong>FAO</strong>
+                                <span>خبرة ميدانية</span>
+                            </div>
                         </div>
                     </div>
 
@@ -246,6 +269,12 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Scroll Hint -->
+            <div id="scroll-hint-btn" class="scroll-hint hidden md:flex" aria-hidden="true">
+                <span>اكتشف المزيد</span>
+                <div class="scroll-hint-line"></div>
             </div>
         </section>
 
@@ -498,7 +527,7 @@
                                             <option value="2500">نباتات زينة (احتياج منخفض)</option>
                                         </select>
                                     </div>
-                                    <button onclick="calculateSavings()" class="btn-primary ripple-btn w-full py-5 text-xl font-bold">
+                                    <button id="calc-savings-btn" class="btn-primary ripple-btn w-full py-5 text-xl font-bold">
                                         <span>احسب التوفير السنوي</span>
                                     </button>
                                     <div id="calc-result" class="hidden pt-8 border-t border-border">
@@ -649,7 +678,7 @@
         <i data-lucide="message-circle" class="w-8 h-8"></i>
     </a>
 
-    <!-- Script -->
-    <script src="script.js?v=4.0"></script>
+    <!-- Script (Minified) -->
+    <script src="public/script.min.js?v=5.0" defer></script>
 </body>
 </html>

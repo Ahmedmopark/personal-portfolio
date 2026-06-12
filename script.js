@@ -1,6 +1,6 @@
 /* ============================================================
-   AHMED MUBARAK PORTFOLIO — script.js v4.0
-   Optimized, secure, interactive
+   AHMED MUBARAK PORTFOLIO — script.js v5.0
+   Optimized, secure, interactive, performant
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -490,6 +490,178 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('img').forEach(img => {
     img.addEventListener('contextmenu', (e) => e.preventDefault());
   });
+
+  /* ══════════════════════════════════════════════════
+     22. WATER DROPLETS CANVAS ANIMATION (Irrigation theme)
+         - Pauses when hero section not visible (perf)
+         - Reduces particles on mobile
+         - Debounced resize
+  ══════════════════════════════════════════════════ */
+  const canvas = document.getElementById('water-droplets-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d', { alpha: true, desynchronized: true });
+    let width = canvas.width = canvas.offsetWidth;
+    let height = canvas.height = canvas.offsetHeight;
+    let animating = true;
+    let rafId = null;
+
+    // Debounced resize
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        width = canvas.width = canvas.offsetWidth;
+        height = canvas.height = canvas.offsetHeight;
+      }, 150);
+    }, { passive: true });
+
+    // Pause when page hidden (battery saving)
+    document.addEventListener('visibilitychange', () => {
+      animating = !document.hidden;
+      if (animating && !rafId) animate();
+    });
+
+    // Fewer particles on mobile for performance
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    const maxParticles = isMobile ? 25 : 50;
+
+    class Droplet {
+      constructor() {
+        this.reset();
+        this.y = Math.random() * height;
+      }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = -20;
+        this.r = Math.random() * 1.5 + 0.5;
+        this.speed = Math.random() * 1.2 + 0.6;
+        this.opacity = Math.random() * 0.35 + 0.15;
+      }
+      update() {
+        this.y += this.speed;
+        if (!isMobile) {
+          // Mouse interaction only on desktop
+          const dx = mouseX - this.x;
+          const dy = mouseY - this.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120 && dist > 0) {
+            const force = (120 - dist) / 120;
+            this.x -= (dx / dist) * force * 1.5;
+          }
+        }
+        if (this.y > height) this.reset();
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(111,168,118,${this.opacity})`;
+        ctx.fill();
+      }
+    }
+
+    const particles = [];
+    for (let i = 0; i < maxParticles; i++) particles.push(new Droplet());
+
+    // Mouse ripples
+    const ripples = [];
+    class Ripple {
+      constructor(x, y) {
+        this.x = x; this.y = y;
+        this.r = 2;
+        this.maxR = Math.random() * 25 + 15;
+        this.speed = Math.random() * 0.6 + 0.6;
+        this.opacity = 0.5;
+      }
+      update() {
+        this.r += this.speed;
+        this.opacity = 1 - (this.r / this.maxR);
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(42,84,37,${this.opacity * 0.3})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+    }
+
+    if (!isMobile) {
+      let lastRippleTime = 0;
+      const heroSection = document.getElementById('home');
+      if (heroSection) {
+        heroSection.addEventListener('mousemove', (e) => {
+          const now = performance.now();
+          if (now - lastRippleTime > 200) {
+            const rect = canvas.getBoundingClientRect();
+            ripples.push(new Ripple(e.clientX - rect.left, e.clientY - rect.top));
+            lastRippleTime = now;
+          }
+        }, { passive: true });
+      }
+    }
+
+    // Pause animation when hero not in view (IntersectionObserver)
+    const heroEl = document.getElementById('home');
+    if (heroEl) {
+      const heroObs = new IntersectionObserver((entries) => {
+        animating = entries[0].isIntersecting;
+        if (animating && !rafId) animate();
+      }, { threshold: 0 });
+      heroObs.observe(heroEl);
+    }
+
+    function animate() {
+      if (!animating) { rafId = null; return; }
+      rafId = requestAnimationFrame(animate);
+      ctx.clearRect(0, 0, width, height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        const r = ripples[i];
+        r.update();
+        if (r.opacity <= 0 || r.r >= r.maxR) ripples.splice(i, 1);
+        else r.draw();
+      }
+    }
+    animate();
+  }
+
+  /* ══════════════════════════════════════════════════
+     23. CSP EVENT BINDINGS & COMPATIBILITY
+  ══════════════════════════════════════════════════ */
+  // Home page Scroll Hint
+  const scrollHint = document.getElementById('scroll-hint-btn');
+  if (scrollHint) {
+    scrollHint.addEventListener('click', () => {
+      document.getElementById('home')?.nextElementSibling?.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  // Water Savings Calculator Button
+  const calcBtn = document.getElementById('calc-savings-btn');
+  if (calcBtn) {
+    calcBtn.addEventListener('click', calculateSavings);
+  }
+
+  // FAQ Accordion Buttons (Services Page)
+  const faqButtons = document.querySelectorAll('.faq-toggle-btn');
+  faqButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const content = btn.nextElementSibling;
+      const icon = btn.querySelector('.icon');
+      if (content) content.classList.toggle('hidden');
+      if (icon) icon.classList.toggle('rotate-180');
+    });
+  });
+
+  // Global Image Load Error Handler (Fail-safe for missing assets)
+  window.addEventListener('error', (e) => {
+    if (e.target && e.target.tagName === 'IMG') {
+      const parent = e.target.parentElement;
+      if (parent && (e.target.src.includes('article1-cover') || e.target.src.includes('article2-cover'))) {
+        parent.style.display = 'none';
+      }
+    }
+  }, true);
 
 }); // end DOMContentLoaded
 

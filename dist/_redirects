@@ -1,0 +1,5 @@
+# Clean URLs
+/*.html  /:splat  301
+
+# Fallback for 404
+/*  /index.html  404

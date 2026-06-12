@@ -9,16 +9,16 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;600;700&display=swap">
     
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Compiled Tailwind CSS -->
+    <link rel="stylesheet" href="public/tailwind.min.css">
     
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@0.372.0"></script>
+    <!-- Custom Style (Minified) -->
+    <link rel="stylesheet" href="public/style.min.css?v=5.0">
     
-    <!-- Custom Style -->
-    <link rel="stylesheet" href="style.css?v=4.0">
+    <!-- Lucide Icons (Self-Hosted) -->
+    <script src="public/lucide.min.js" defer></script>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -32,31 +32,7 @@
     <meta property="og:description" content="خدمات هندسة الري المتقدمة، تحليل التربة، والإشراف الفني. حلول هندسية ذكية لترشيد المياه وزيادة الإنتاجية.">
     <meta property="og:image" content="https://ahmed-moparak.netlify.app/public/og-image.jpg">
     
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#2D5A27',
-                        'primary-dark': '#1e3d1a',
-                        'accent-green': '#79a37d',
-                        background: 'var(--background)',
-                        foreground: 'var(--foreground)',
-                        card: 'var(--card)',
-                        border: 'var(--border)',
-                        muted: 'var(--muted)',
-                        'muted-foreground': 'var(--muted-foreground)',
-                    },
-                    fontFamily: {
-                        heading: ['Readex Pro', 'sans-serif'],
-                        body: ['Readex Pro', 'sans-serif'],
-                        serif: ['Readex Pro', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+
 </head>
 <body class="bg-background text-foreground transition-colors duration-300">
     <!-- Preloader -->
@@ -271,7 +247,7 @@
                                                 <option value="2500">نباتات زينة (احتياج منخفض)</option>
                                             </select>
                                         </div>
-                                        <button onclick="calculateSavings()" class="w-full py-5 bg-primary text-white rounded-2xl font-bold text-xl hover:bg-primary-dark transition-all shadow-xl">
+                                        <button id="calc-savings-btn" class="w-full py-5 bg-primary text-white rounded-2xl font-bold text-xl hover:bg-primary-dark transition-all shadow-xl">
                                             احسب التوفير الآن
                                         </button>
                                         <div id="calc-result" class="hidden pt-8 border-t border-border animate-fade-in">
@@ -298,7 +274,7 @@
                     <div class="space-y-4 reveal-y">
                         <!-- FAQ Item 1 -->
                         <div class="glass rounded-2xl border border-border overflow-hidden">
-                            <button class="w-full p-6 text-right flex justify-between items-center group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.icon').classList.toggle('rotate-180')">
+                            <button class="faq-toggle-btn w-full p-6 text-right flex justify-between items-center group">
                                 <span class="text-lg font-bold">ما هي مدة تنفيذ مشروع ري متكامل؟</span>
                                 <i data-lucide="chevron-down" class="icon w-5 h-5 text-primary transition-transform"></i>
                             </button>
@@ -308,7 +284,7 @@
                         </div>
                         <!-- FAQ Item 2 -->
                         <div class="glass rounded-2xl border border-border overflow-hidden">
-                            <button class="w-full p-6 text-right flex justify-between items-center group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.icon').classList.toggle('rotate-180')">
+                            <button class="faq-toggle-btn w-full p-6 text-right flex justify-between items-center group">
                                 <span class="text-lg font-bold">هل توفرون ضماناً على الأنظمة المنفذة؟</span>
                                 <i data-lucide="chevron-down" class="icon w-5 h-5 text-primary transition-transform"></i>
                             </button>
@@ -318,7 +294,7 @@
                         </div>
                         <!-- FAQ Item 3 -->
                         <div class="glass rounded-2xl border border-border overflow-hidden">
-                            <button class="w-full p-6 text-right flex justify-between items-center group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.icon').classList.toggle('rotate-180')">
+                            <button class="faq-toggle-btn w-full p-6 text-right flex justify-between items-center group">
                                 <span class="text-lg font-bold">هل يمكن تحويل نظام ري قديم إلى نظام ري ذكي؟</span>
                                 <i data-lucide="chevron-down" class="icon w-5 h-5 text-primary transition-transform"></i>
                             </button>
@@ -426,7 +402,7 @@
         <i data-lucide="message-circle" class="w-8 h-8"></i>
     </a>
 
-    <!-- Script -->
-    <script src="script.js?v=4.0"></script>
+    <!-- Script (Minified) -->
+    <script src="public/script.min.js?v=5.0" defer></script>
 </body>
 </html>
